@@ -44,6 +44,12 @@
 #if YYDEBUG
 extern int yydebug;
 #endif
+/* "%code requires" blocks.  */
+#line 17 "parser.y"
+
+    #include "node.h"
+
+#line 53 "parser.tab.h"
 
 /* Token kinds.  */
 #ifndef YYTOKENTYPE
@@ -54,30 +60,30 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    IDENTIFICADOR = 258,           /* IDENTIFICADOR  */
-    STRING = 259,                  /* STRING  */
-    NUMERO = 260,                  /* NUMERO  */
-    FREQUENCIA = 261,              /* FREQUENCIA  */
-    RESOLUCAO = 262,               /* RESOLUCAO  */
-    COM = 263,                     /* COM  */
-    VAR = 264,                     /* VAR  */
-    INTEIRO = 265,                 /* INTEIRO  */
-    TEXTO = 266,                   /* TEXTO  */
-    BOOLEANO = 267,                /* BOOLEANO  */
-    CONFIG = 268,                  /* CONFIG  */
-    REPITA = 269,                  /* REPITA  */
-    FIM = 270,                     /* FIM  */
-    LIGAR = 271,                   /* LIGAR  */
-    DESLIGAR = 272,                /* DESLIGAR  */
-    ESPERAR = 273,                 /* ESPERAR  */
-    CONFIGURAR = 274,              /* CONFIGURAR  */
-    COMO = 275,                    /* COMO  */
-    CONFIGURARPWM = 276,           /* CONFIGURARPWM  */
-    CONECTARWIFI = 277,            /* CONECTARWIFI  */
-    VALOR = 278,                   /* VALOR  */
-    AJUSTARPWM = 279,              /* AJUSTARPWM  */
-    SAIDA = 280,                   /* SAIDA  */
-    ENTRADA = 281                  /* ENTRADA  */
+    INTEIRO = 258,                 /* INTEIRO  */
+    TEXTO = 259,                   /* TEXTO  */
+    IDENTIFICADOR = 260,           /* IDENTIFICADOR  */
+    STRING = 261,                  /* STRING  */
+    SAIDA = 262,                   /* SAIDA  */
+    ENTRADA = 263,                 /* ENTRADA  */
+    NUMERO = 264,                  /* NUMERO  */
+    FREQUENCIA = 265,              /* FREQUENCIA  */
+    RESOLUCAO = 266,               /* RESOLUCAO  */
+    COM = 267,                     /* COM  */
+    VAR = 268,                     /* VAR  */
+    BOOLEANO = 269,                /* BOOLEANO  */
+    CONFIG = 270,                  /* CONFIG  */
+    REPITA = 271,                  /* REPITA  */
+    FIM = 272,                     /* FIM  */
+    LIGAR = 273,                   /* LIGAR  */
+    DESLIGAR = 274,                /* DESLIGAR  */
+    ESPERAR = 275,                 /* ESPERAR  */
+    CONFIGURAR = 276,              /* CONFIGURAR  */
+    COMO = 277,                    /* COMO  */
+    CONFIGURARPWM = 278,           /* CONFIGURARPWM  */
+    CONECTARWIFI = 279,            /* CONECTARWIFI  */
+    VALOR = 280,                   /* VALOR  */
+    AJUSTARPWM = 281               /* AJUSTARPWM  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -86,13 +92,13 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 17 "parser.y"
+#line 22 "parser.y"
 
     int intval;     // Para números inteiros
     char *strval;   // Para identificadores e strings
     Node *node;
 
-#line 96 "parser.tab.h"
+#line 102 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

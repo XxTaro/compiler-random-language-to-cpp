@@ -17,5 +17,6 @@ typedef struct Node {
 Node *newNode(char *label, int numChildren, ...);
 void printTree(Node *node, int depth);
 void freeTree(Node *node);
+void addChild(Node *parent, Node *child);
 
 #endif

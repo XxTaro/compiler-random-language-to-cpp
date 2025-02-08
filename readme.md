@@ -1,5 +1,5 @@
-## Analisador léxico: lexer.l
-## Analisador sintático: parser.y
+- Analisador léxico: lexer.l
+- Analisador sintático: parser.y
 
 ### Ordem de execução dos comandos:
 1. Criado o arquivo lexer.l contendo todas as palavras chaves, números, identificadores e operadores da linguagem personalizada.
