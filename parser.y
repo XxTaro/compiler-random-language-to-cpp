@@ -64,12 +64,7 @@ bloco_opt:
 // Declaração de variáveis
 declaracoes:
     { $$ = newNode("DECLARACOES", 0); } /* Garante um nó inicial */
-    | declaracoes declaracao { 
-        if (!$1 || !$2) {
-            printf("[ERRO] declaracoes ou declaracao retornaram NULL!\n");
-        }
-        $$ = newNode("DECLARACOES", 2, $1, $2);
-    }
+    | declaracoes declaracao { addChild($1, $2); $$ = $1; }
     ;
 
 declaracao:
@@ -103,7 +98,7 @@ config:
     CONFIG bloco FIM { 
         printf("Configuração processada.\n");
         printf("[DEBUG] Criando nó CONFIG, bloco=%p\n", (void*)$2);
-        $$ = newNode("CONFIG", 1, $2);  // Criando o nó corretamente
+        $$ = newNode("CONFIG", 2, $2, newNode("FIM", 0));  // Criando o nó corretamente
     }
     ;
 
@@ -112,7 +107,7 @@ repita:
     REPITA bloco FIM { 
         printf("Loop principal processado.\n");
         printf("[DEBUG] Criando nó para LOOP PRINCIPAL\n");
-        $$ = newNode("REPITA", 1, $2);  // Criando o nó corretamente
+        $$ = newNode("REPITA", 2, $2, newNode("FIM", 0));  // Criando o nó corretamente
     }
     ;
 
@@ -127,11 +122,11 @@ bloco:
 
 // Comandos suportados
 comando:
-    atribuicao { $$ = newNode("ATRIBUICAO", 1, $1); }
-    | operacao_pwm { $$ = newNode("OPERACAO_PWM", 1, $1); }
-    | operacao_io { $$ = newNode("OPERACAO_IO", 1, $1); }
-    | operacao_wifi { $$ = newNode("OPERACAO_WIFI", 1, $1); }
-    | operacao_controle { $$ = newNode("OPERACAO_CONTROLE", 1, $1); }
+    atribuicao { $$ = $1; }
+    | operacao_pwm { $$ = $1; }
+    | operacao_io { $$ = $1; }
+    | operacao_wifi { $$ = $1; }
+    | operacao_controle { $$ = $1; }
     ;
 
 // Atribuição de valores
@@ -153,7 +148,7 @@ operacao_pwm:
     AJUSTARPWM IDENTIFICADOR COM VALOR NUMERO ';' {
         char valorStr[16];
         sprintf(valorStr, "%d", $5);  // Converte o número para string
-    
+
         $$ = newNode("AJUSTAR_PWM", 3,  
             newNode($2, 0), 
             newNode("VALOR", 1, newNode(strdup(valorStr), 0))  
