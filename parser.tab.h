@@ -45,7 +45,7 @@
 extern int yydebug;
 #endif
 /* "%code requires" blocks.  */
-#line 17 "parser.y"
+#line 18 "parser.y"
 
     #include "node.h"
 
@@ -92,7 +92,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 22 "parser.y"
+#line 23 "parser.y"
 
     int intval;     // Para números inteiros
     char *strval;   // Para identificadores e strings

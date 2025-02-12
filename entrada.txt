@@ -1,4 +1,4 @@
-var inteiro: ledPin, brilho;
+var inteiro: brilho, ledPin;
 var texto: ssid, senha;
 
 config
