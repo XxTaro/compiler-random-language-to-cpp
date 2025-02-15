@@ -104,7 +104,7 @@ declaracao:
     | VAR TEXTO ':' lista_identificadores ';' { 
         if (!$4) {
             printf("[ERRO] lista_identificadores retornou NULL!\n");
-            $$ = newNode("DECLARACAO", 1, newNode(strdup("TEXTO"), 0)); // Nó mínimo
+            $$ = newNode("DECLARACAO", 1, newNode(strdup("TEXTO"), 0));
         } else {
             $$ = newNode("DECLARACAO", 2, newNode(strdup("TEXTO"), 0), $4);
         }
@@ -115,8 +115,8 @@ declaracao:
                 Node *identNode = idList->children[0];  
                 
                 char *varName = (strcmp(identNode->label, "IDENTIFICADOR") == 0 && identNode->numChildren > 0) 
-                                ? identNode->children[0]->label  // Pegando o filho correto
-                                : identNode->label;  // Já é o nome correto
+                                ? identNode->children[0]->label
+                                : identNode->label;
 
                 if (lookupSymbol(varName) != NULL) {
                     printf("Erro Semântico: Variável '%s' já declarada!\n", varName);
@@ -131,7 +131,7 @@ declaracao:
     | VAR BOOLEANO ':' lista_identificadores ';' { 
         if (!$4) {
             printf("[ERRO] lista_identificadores retornou NULL!\n");
-            $$ = newNode("DECLARACAO", 1, newNode(strdup("BOOLEANO"), 0)); // Nó mínimo
+            $$ = newNode("DECLARACAO", 1, newNode(strdup("BOOLEANO"), 0));
         } else {
             $$ = newNode("DECLARACAO", 2, newNode(strdup("BOOLEANO"), 0), $4);
         }
@@ -142,8 +142,8 @@ declaracao:
                 Node *identNode = idList->children[0];  
                 
                 char *varName = (strcmp(identNode->label, "IDENTIFICADOR") == 0 && identNode->numChildren > 0) 
-                                ? identNode->children[0]->label  // Pegando o filho correto
-                                : identNode->label;  // Já é o nome correto
+                                ? identNode->children[0]->label
+                                : identNode->label;
 
                 if (lookupSymbol(varName) != NULL) {
                     printf("Erro Semântico: Variável '%s' já declarada!\n", varName);
@@ -560,14 +560,13 @@ operacao_divisao:
 void yyerror(const char *s) {
     fprintf(stderr, "Erro sintático na linha %d: %s\n", yylineno - 1, s);
 
-    // Abrir o arquivo de entrada novamente para ler a linha do erro
-    FILE *arquivo = fopen("entrada.txt", "r"); // Certifique-se de que está correto
+    FILE *arquivo = fopen("entrada.txt", "r");
     if (arquivo) {
         char linha[1024];
         int linha_atual = 1;
 
         while (fgets(linha, sizeof(linha), arquivo)) {
-            if (linha_atual == yylineno - 1) {  // A linha do erro
+            if (linha_atual == yylineno - 1) { 
                 fprintf(stderr, ">> %s", linha);
                 break;
             }
@@ -594,7 +593,6 @@ int main() {
 
     printf("[DEBUG] Gerando código C++...\n");
 
-    // Abrir o arquivo de saída para C++
     FILE *cppFile = fopen("output/saida.cpp", "w");
     if (!cppFile) {
         perror("[ERRO] Não foi possível criar o arquivo de saída");
