@@ -1,0 +1,18 @@
+var inteiro: estadoBotao, ledPin;
+
+config
+    configurar ledPin como saida;
+fim
+
+repita
+    se estadoBotao == 1 entao
+        ligar ledPin;
+    senao
+        desligar ledPin;
+    fim
+
+    enquanto
+        ajustarPWM ledPin com valor 512;
+        esperar 1000;
+    fim
+fim

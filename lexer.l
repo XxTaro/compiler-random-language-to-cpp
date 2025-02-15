@@ -8,31 +8,37 @@ char linha_atual[MAX_LINHA]; // Armazena a linha atual para exibir no erro
 int posicao_linha = 0;  // Índice para armazenar caracteres
 %}
 
-VAR              [Vv]ar
-INTEIRO          [Ii]nteiro
-TEXTO            [Tt]exto
-BOOLEANO         [Bb]ooleano
-CONFIG           [Cc]onfig
-REPITA           [Rr]epita
-FIM              [Ff]im
-LIGAR            [Ll]igar
-DESLIGAR         [Dd]esligar
-ESPERAR          [Ee]sperar
-CONFIGURAR       [Cc]onfigurar
-CONFIGURARPWM    [Cc]onfigurarPWM
-COMO             [Cc]omo
-SAIDA            [Ss]aida
-ENTRADA          [Ee]ntrada
-FREQUENCIA       [Ff]requencia
-RESOLUCAO        [Rr]esolucao
-CONECTARWIFI     [Cc]onectarWifi
-ENVIARHTTP       [Ee]nviarHttp
-CONFIGURARSERIAL [Cc]onfigurarSerial
-ESCREVERSERIAL   [Ee]screverSerial
-LERSERIAL        [Ll]erSerial
-COM              [Cc]om
-VALOR            [Vv]alor
-AJUSTARPWM       [Aa]justarPWM
+VAR              var
+INTEIRO          inteiro
+TEXTO            texto
+BOOLEANO         booleano
+CONFIG           config
+REPITA           repita
+FIM              fim
+LIGAR            ligar
+DESLIGAR         desligar
+ESPERAR          esperar
+CONFIGURAR       configurar
+CONFIGURARPWM    configurarPWM
+COMO             como
+SAIDA            saida
+ENTRADA          entrada
+FREQUENCIA       frequencia
+RESOLUCAO        resolucao
+CONECTARWIFI     conectarWifi
+ENVIARHTTP       enviarHttp
+CONFIGURARSERIAL configurarSerial
+ESCREVERSERIAL   escreverSerial
+LERSERIAL        lerSerial
+COM              com
+VALOR            valor
+AJUSTARPWM       ajustarPWM
+SE               se
+ENTAO            entao
+SENAO            senao
+ENQUANTO         enquanto
+VERDADEIRO       verdadeiro
+FALSO            falso
 
 IDENTIFICADOR [a-zA-Z_][a-zA-Z0-9_]*
 NUMERO        [0-9]+
@@ -71,9 +77,15 @@ COMENTARIO    "//".*
 {COM}              return COM;
 {VALOR}            return VALOR;
 {AJUSTARPWM}       return AJUSTARPWM;
+{SE}               return SE;
+{ENTAO}            return ENTAO;
+{SENAO}            return SENAO;
+{ENQUANTO}         return ENQUANTO;
 
 {NUMERO}        { yylval.intval = atoi(yytext); return NUMERO; }
 {STRING}        { yylval.strval = strdup(yytext); return STRING; }
+{VERDADEIRO}    { yylval.strval = strdup("verdadeiro"); return VERDADEIRO; }
+{FALSO}         { yylval.strval = strdup("falso"); return FALSO; }
 {SAIDA}         { return SAIDA; }
 {IDENTIFICADOR} { yylval.strval = strdup(yytext); return IDENTIFICADOR; }
 
@@ -81,6 +93,16 @@ COMENTARIO    "//".*
 ";"          return ';';
 ":"          return ':';
 ","          return ',';
+"+"          return SOMA;
+"-"          return SUBTRACAO;
+"*"          return MULTIPLICACAO;
+"/"          return DIVISAO;
+"=="         return IGUAL;
+"!="         return DIFERENTE;
+"<"          return MENOR_QUE;
+">"          return MAIOR_QUE;
+">="         return MAIOR_IGUAL;
+"<="         return MENOR_IGUAL;
 
 . {
     if (yytext[0] == '\n') {

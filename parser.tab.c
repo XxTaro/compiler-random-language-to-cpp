@@ -135,28 +135,57 @@ enum yysymbol_kind_t
   YYSYMBOL_COMO = 22,                      /* COMO  */
   YYSYMBOL_CONFIGURARPWM = 23,             /* CONFIGURARPWM  */
   YYSYMBOL_CONECTARWIFI = 24,              /* CONECTARWIFI  */
-  YYSYMBOL_VALOR = 25,                     /* VALOR  */
-  YYSYMBOL_AJUSTARPWM = 26,                /* AJUSTARPWM  */
-  YYSYMBOL_27_ = 27,                       /* '='  */
-  YYSYMBOL_28_ = 28,                       /* ':'  */
-  YYSYMBOL_29_ = 29,                       /* ';'  */
-  YYSYMBOL_30_ = 30,                       /* ','  */
-  YYSYMBOL_YYACCEPT = 31,                  /* $accept  */
-  YYSYMBOL_programa = 32,                  /* programa  */
-  YYSYMBOL_bloco_opt = 33,                 /* bloco_opt  */
-  YYSYMBOL_declaracoes = 34,               /* declaracoes  */
-  YYSYMBOL_declaracao = 35,                /* declaracao  */
-  YYSYMBOL_lista_identificadores = 36,     /* lista_identificadores  */
-  YYSYMBOL_config = 37,                    /* config  */
-  YYSYMBOL_repita = 38,                    /* repita  */
-  YYSYMBOL_bloco = 39,                     /* bloco  */
-  YYSYMBOL_comando = 40,                   /* comando  */
-  YYSYMBOL_atribuicao = 41,                /* atribuicao  */
-  YYSYMBOL_operacao_pwm = 42,              /* operacao_pwm  */
-  YYSYMBOL_operacao_io = 43,               /* operacao_io  */
-  YYSYMBOL_operacao_wifi = 44,             /* operacao_wifi  */
-  YYSYMBOL_operacao_controle = 45,         /* operacao_controle  */
-  YYSYMBOL_fim_opt = 46                    /* fim_opt  */
+  YYSYMBOL_ENVIARHTTP = 25,                /* ENVIARHTTP  */
+  YYSYMBOL_VALOR = 26,                     /* VALOR  */
+  YYSYMBOL_AJUSTARPWM = 27,                /* AJUSTARPWM  */
+  YYSYMBOL_CONFIGURARSERIAL = 28,          /* CONFIGURARSERIAL  */
+  YYSYMBOL_ESCREVERSERIAL = 29,            /* ESCREVERSERIAL  */
+  YYSYMBOL_LERSERIAL = 30,                 /* LERSERIAL  */
+  YYSYMBOL_SE = 31,                        /* SE  */
+  YYSYMBOL_ENTAO = 32,                     /* ENTAO  */
+  YYSYMBOL_SENAO = 33,                     /* SENAO  */
+  YYSYMBOL_ENQUANTO = 34,                  /* ENQUANTO  */
+  YYSYMBOL_VERDADEIRO = 35,                /* VERDADEIRO  */
+  YYSYMBOL_FALSO = 36,                     /* FALSO  */
+  YYSYMBOL_IGUAL = 37,                     /* IGUAL  */
+  YYSYMBOL_DIFERENTE = 38,                 /* DIFERENTE  */
+  YYSYMBOL_MENOR_QUE = 39,                 /* MENOR_QUE  */
+  YYSYMBOL_MAIOR_QUE = 40,                 /* MAIOR_QUE  */
+  YYSYMBOL_MAIOR_IGUAL = 41,               /* MAIOR_IGUAL  */
+  YYSYMBOL_MENOR_IGUAL = 42,               /* MENOR_IGUAL  */
+  YYSYMBOL_SOMA = 43,                      /* SOMA  */
+  YYSYMBOL_SUBTRACAO = 44,                 /* SUBTRACAO  */
+  YYSYMBOL_MULTIPLICACAO = 45,             /* MULTIPLICACAO  */
+  YYSYMBOL_DIVISAO = 46,                   /* DIVISAO  */
+  YYSYMBOL_47_ = 47,                       /* '='  */
+  YYSYMBOL_48_ = 48,                       /* ':'  */
+  YYSYMBOL_49_ = 49,                       /* ';'  */
+  YYSYMBOL_50_ = 50,                       /* ','  */
+  YYSYMBOL_YYACCEPT = 51,                  /* $accept  */
+  YYSYMBOL_programa = 52,                  /* programa  */
+  YYSYMBOL_bloco_opt = 53,                 /* bloco_opt  */
+  YYSYMBOL_declaracoes = 54,               /* declaracoes  */
+  YYSYMBOL_declaracao = 55,                /* declaracao  */
+  YYSYMBOL_lista_identificadores = 56,     /* lista_identificadores  */
+  YYSYMBOL_config = 57,                    /* config  */
+  YYSYMBOL_repita = 58,                    /* repita  */
+  YYSYMBOL_bloco = 59,                     /* bloco  */
+  YYSYMBOL_comando = 60,                   /* comando  */
+  YYSYMBOL_atribuicao = 61,                /* atribuicao  */
+  YYSYMBOL_operacao_pwm = 62,              /* operacao_pwm  */
+  YYSYMBOL_operacao_io = 63,               /* operacao_io  */
+  YYSYMBOL_operacao_wifi = 64,             /* operacao_wifi  */
+  YYSYMBOL_operacao_serial = 65,           /* operacao_serial  */
+  YYSYMBOL_operacao_controle = 66,         /* operacao_controle  */
+  YYSYMBOL_fim_opt = 67,                   /* fim_opt  */
+  YYSYMBOL_operacao_condicional = 68,      /* operacao_condicional  */
+  YYSYMBOL_senao_opt = 69,                 /* senao_opt  */
+  YYSYMBOL_expressao_logica = 70,          /* expressao_logica  */
+  YYSYMBOL_operacoes_aritmeticas = 71,     /* operacoes_aritmeticas  */
+  YYSYMBOL_operacao_soma = 72,             /* operacao_soma  */
+  YYSYMBOL_operacao_subtracao = 73,        /* operacao_subtracao  */
+  YYSYMBOL_operacao_multiplicacao = 74,    /* operacao_multiplicacao  */
+  YYSYMBOL_operacao_divisao = 75           /* operacao_divisao  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -273,7 +302,7 @@ typedef int yytype_uint16;
 
 
 /* Stored state numbers (used for stacks). */
-typedef yytype_int8 yy_state_t;
+typedef yytype_uint8 yy_state_t;
 
 /* State numbers in computations.  */
 typedef int yy_state_fast_t;
@@ -484,19 +513,19 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  3
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   84
+#define YYLAST   200
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  31
+#define YYNTOKENS  51
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  16
+#define YYNNTS  25
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  31
+#define YYNRULES  75
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  77
+#define YYNSTATES  158
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   281
+#define YYMAXUTOK   301
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -514,9 +543,9 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,    30,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,    28,    29,
-       2,    27,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,    50,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,    48,    49,
+       2,    47,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -538,17 +567,23 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25,    26
+      25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
+      45,    46
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    48,    48,    61,    62,    67,    68,    72,   100,   128,
-     159,   160,   167,   176,   185,   186,   194,   195,   196,   197,
-     198,   203,   210,   219,   229,   234,   249,   254,   263,   274,
-     283,   284
+       0,    52,    52,    65,    66,    71,    72,    76,   103,   131,
+     162,   163,   170,   179,   188,   189,   197,   198,   199,   200,
+     201,   202,   203,   204,   209,   216,   221,   226,   231,   239,
+     249,   254,   269,   274,   279,   283,   291,   298,   304,   313,
+     316,   324,   333,   334,   338,   342,   349,   350,   354,   359,
+     368,   377,   386,   395,   404,   413,   423,   424,   425,   426,
+     429,   435,   443,   451,   462,   468,   476,   484,   495,   501,
+     509,   517,   528,   534,   542,   550
 };
 #endif
 
@@ -568,11 +603,17 @@ static const char *const yytname[] =
   "IDENTIFICADOR", "STRING", "SAIDA", "ENTRADA", "NUMERO", "FREQUENCIA",
   "RESOLUCAO", "COM", "VAR", "BOOLEANO", "CONFIG", "REPITA", "FIM",
   "LIGAR", "DESLIGAR", "ESPERAR", "CONFIGURAR", "COMO", "CONFIGURARPWM",
-  "CONECTARWIFI", "VALOR", "AJUSTARPWM", "'='", "':'", "';'", "','",
-  "$accept", "programa", "bloco_opt", "declaracoes", "declaracao",
-  "lista_identificadores", "config", "repita", "bloco", "comando",
-  "atribuicao", "operacao_pwm", "operacao_io", "operacao_wifi",
-  "operacao_controle", "fim_opt", YY_NULLPTR
+  "CONECTARWIFI", "ENVIARHTTP", "VALOR", "AJUSTARPWM", "CONFIGURARSERIAL",
+  "ESCREVERSERIAL", "LERSERIAL", "SE", "ENTAO", "SENAO", "ENQUANTO",
+  "VERDADEIRO", "FALSO", "IGUAL", "DIFERENTE", "MENOR_QUE", "MAIOR_QUE",
+  "MAIOR_IGUAL", "MENOR_IGUAL", "SOMA", "SUBTRACAO", "MULTIPLICACAO",
+  "DIVISAO", "'='", "':'", "';'", "','", "$accept", "programa",
+  "bloco_opt", "declaracoes", "declaracao", "lista_identificadores",
+  "config", "repita", "bloco", "comando", "atribuicao", "operacao_pwm",
+  "operacao_io", "operacao_wifi", "operacao_serial", "operacao_controle",
+  "fim_opt", "operacao_condicional", "senao_opt", "expressao_logica",
+  "operacoes_aritmeticas", "operacao_soma", "operacao_subtracao",
+  "operacao_multiplicacao", "operacao_divisao", YY_NULLPTR
 };
 
 static const char *
@@ -582,7 +623,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-18)
+#define YYPACT_NINF (-31)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -594,16 +635,24 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-static const yytype_int8 yypact[] =
+static const yytype_int16 yypact[] =
 {
-     -18,    11,    -8,   -18,     0,    18,   -18,    18,   -10,    -2,
-      12,     8,    20,    38,    46,    47,    48,    -4,   -18,   -18,
-     -18,   -18,   -18,   -18,    39,    18,    49,    49,    49,     6,
-      27,    35,    50,    53,    51,   -18,   -18,    18,    18,   -18,
-       2,     7,    16,    30,    31,   -18,    40,    54,    32,    41,
-       4,    52,   -18,    60,   -18,   -18,   -18,   -18,    42,    43,
-      58,   -18,     1,   -18,   -18,   -18,   -18,   -18,   -18,    57,
-      44,    45,    61,   -18,   -18,    55,   -18
+     -31,    20,    69,   -31,     1,   127,   -31,   127,   -25,   -19,
+       6,    14,    67,    57,    64,    71,    89,    95,   101,   102,
+     117,   105,   120,   130,   127,    19,   -31,   -31,   -31,   -31,
+     -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   133,
+     127,   138,   138,   138,     8,     9,    16,    17,    -3,    25,
+      26,    40,    46,   104,   108,   110,   140,   148,   158,   159,
+     152,   118,   119,   -30,   134,    47,   -31,   -31,   127,   127,
+     -31,    54,    88,    90,   -31,   -31,   -31,   -31,   -31,   -31,
+     -31,   -31,   121,   122,   123,   124,   125,   126,   -31,   -31,
+     -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   109,
+     166,   128,   129,   143,   -31,   -31,    92,   170,   171,   172,
+     173,   174,   127,   -31,    68,   167,   -31,   180,   -31,   -31,
+     -31,   -31,   -31,   -31,   -31,   -31,   137,   139,   178,   -31,
+     -31,    74,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   100,
+     -31,   -31,   -31,   -31,   -31,   -31,   179,   142,   144,   127,
+     175,   185,   -31,   -31,   127,   -31,   146,   -31
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -612,79 +661,125 @@ static const yytype_int8 yypact[] =
 static const yytype_int8 yydefact[] =
 {
        5,     0,     0,     1,     0,     0,     6,     3,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,    14,    16,
-      17,    18,    19,    20,     0,     4,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    12,    15,     0,     3,    10,
-       0,     0,     0,     0,     0,    29,     0,     0,     0,     0,
-       0,    30,     7,     0,     8,     9,    22,    21,     0,     0,
-       0,    28,     0,    13,    31,     2,    11,    26,    27,     0,
-       0,     0,     0,    24,    23,     0,    25
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,    14,    16,    17,    18,
+      19,    21,    20,    22,    23,    56,    57,    58,    59,     0,
+       4,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,    48,     0,     0,    12,    15,     0,     3,
+      10,     0,     0,     0,    60,    61,    64,    65,    68,    69,
+      72,    73,     0,     0,     0,     0,     0,     0,    62,    63,
+      66,    67,    70,    71,    74,    75,    34,    35,    41,     0,
+       0,     0,     0,     0,    38,    39,     0,     0,     0,     0,
+       0,     0,     0,    45,     0,    42,     7,     0,     8,     9,
+      25,    24,    40,    26,    27,    28,     0,     0,     0,    36,
+      37,     0,    55,    49,    50,    51,    52,    53,    54,    46,
+      13,    43,     2,    11,    32,    33,     0,     0,     0,     0,
+       0,     0,    30,    29,    47,    44,     0,    31
 };
 
 /* YYPGOTO[NTERM-NUM].  */
-static const yytype_int8 yypgoto[] =
+static const yytype_int16 yypgoto[] =
 {
-     -18,   -18,    37,   -18,   -18,    22,   -18,   -18,    -3,   -17,
-     -18,   -18,   -18,   -18,   -18,   -18
+     -31,   -31,   131,   -31,   -31,    99,   -31,   -31,    -5,   -24,
+     -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   141,
+     -31,   -31,   -31,   -31,   -31
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
-static const yytype_int8 yydefgoto[] =
+static const yytype_uint8 yydefgoto[] =
 {
-       0,     1,    24,     2,     6,    40,     7,    38,    25,    18,
-      19,    20,    21,    22,    23,    65
+       0,     1,    39,     2,     6,    71,     7,    69,    40,    26,
+      27,    28,    29,    30,    31,    32,   142,    33,   150,    64,
+      34,    35,    36,    37,    38
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
    positive, shift that token.  If negative, reduce the rule whose
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
-static const yytype_int8 yytable[] =
+static const yytype_uint8 yytable[] =
 {
-      36,    11,    17,     8,     9,     4,    70,     5,    36,    11,
-      71,     3,    43,    35,    10,    44,    12,    13,    26,    14,
-      15,    63,    16,    11,    12,    13,    27,    14,    15,    30,
-      16,    52,    53,    36,    50,    29,    54,    53,    12,    13,
-      28,    14,    15,    31,    16,    55,    53,    58,    59,    41,
-      42,    32,    33,    34,    39,    37,    45,    46,    48,    56,
-      57,    61,    47,    49,    60,    66,    62,    69,    72,    64,
-      75,    67,    68,    73,    74,    51,     0,     0,     0,     0,
-       0,     0,     0,     0,    76
+      25,    67,    63,    82,     8,     9,    83,   106,   107,   108,
+     109,   110,   111,    74,    76,    10,    67,    75,    77,    65,
+       3,    78,    80,    41,    11,    79,    81,    84,    12,    42,
+      88,    90,    85,    86,    89,    91,    66,    13,    14,    15,
+      16,    67,    17,    18,    19,    92,    20,    21,    22,    93,
+      23,    94,    11,    24,    43,    95,    12,    44,    45,    46,
+      47,    48,    53,   114,   113,    13,    14,    15,    16,    54,
+      17,    18,    19,    11,    20,    21,    22,    12,    23,   147,
+      55,    24,     4,   148,     5,   140,    13,    14,    15,    16,
+      67,    17,    18,    19,    56,    20,    21,    22,   132,    23,
+      57,   133,    24,   116,   117,    11,    58,   139,    59,    12,
+      49,    50,    51,    52,    61,    67,   126,   127,    13,    14,
+      15,    16,    60,    17,    18,    19,    62,    20,    21,    22,
+      67,    23,    11,   149,    24,    63,    12,   118,   117,   119,
+     117,    72,    73,    70,   154,    13,    14,    15,    16,    68,
+      17,    18,    19,    96,    20,    21,    22,    97,    23,    98,
+     100,    24,    99,   101,   103,   102,   112,   104,   105,   131,
+     120,   121,   122,   123,   124,   125,   128,   129,   130,   134,
+     135,   136,   137,   138,   141,   143,   144,   146,   145,    87,
+     151,   152,   155,   153,   156,   157,     0,     0,     0,     0,
+     115
 };
 
-static const yytype_int8 yycheck[] =
+static const yytype_int16 yycheck[] =
 {
-      17,     5,     5,     3,     4,    13,     5,    15,    25,     5,
-       9,     0,     6,    17,    14,     9,    20,    21,    28,    23,
-      24,    17,    26,     5,    20,    21,    28,    23,    24,     9,
-      26,    29,    30,    50,    37,    27,    29,    30,    20,    21,
-      28,    23,    24,     5,    26,    29,    30,     7,     8,    27,
-      28,     5,     5,     5,     5,    16,    29,    22,     5,    29,
-      29,    29,    12,    12,    10,     5,    25,     9,    11,    17,
-       9,    29,    29,    29,    29,    38,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    29
+       5,    25,     5,     6,     3,     4,     9,    37,    38,    39,
+      40,    41,    42,     5,     5,    14,    40,     9,     9,    24,
+       0,     5,     5,    48,     5,     9,     9,    30,     9,    48,
+       5,     5,    35,    36,     9,     9,    17,    18,    19,    20,
+      21,    65,    23,    24,    25,     5,    27,    28,    29,     9,
+      31,     5,     5,    34,    48,     9,     9,    43,    44,    45,
+      46,    47,     5,    68,    17,    18,    19,    20,    21,     5,
+      23,    24,    25,     5,    27,    28,    29,     9,    31,     5,
+       9,    34,    13,     9,    15,    17,    18,    19,    20,    21,
+     114,    23,    24,    25,     5,    27,    28,    29,     6,    31,
+       5,     9,    34,    49,    50,     5,     5,   112,     6,     9,
+      43,    44,    45,    46,     9,   139,     7,     8,    18,    19,
+      20,    21,     5,    23,    24,    25,     6,    27,    28,    29,
+     154,    31,     5,    33,    34,     5,     9,    49,    50,    49,
+      50,    42,    43,     5,   149,    18,    19,    20,    21,    16,
+      23,    24,    25,    49,    27,    28,    29,    49,    31,    49,
+      12,    34,    22,     5,    12,     6,    32,    49,    49,    26,
+      49,    49,    49,    49,    49,    49,    10,    49,    49,     9,
+       9,     9,     9,     9,    17,     5,    49,     9,    49,    48,
+      11,    49,    17,    49,     9,    49,    -1,    -1,    -1,    -1,
+      69
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    32,    34,     0,    13,    15,    35,    37,     3,     4,
-      14,     5,    20,    21,    23,    24,    26,    39,    40,    41,
-      42,    43,    44,    45,    33,    39,    28,    28,    28,    27,
-       9,     5,     5,     5,     5,    17,    40,    16,    38,     5,
-      36,    36,    36,     6,     9,    29,    22,    12,     5,    12,
-      39,    33,    29,    30,    29,    29,    29,    29,     7,     8,
-      10,    29,    25,    17,    17,    46,     5,    29,    29,     9,
-       5,     9,    11,    29,    29,     9,    29
+       0,    52,    54,     0,    13,    15,    55,    57,     3,     4,
+      14,     5,     9,    18,    19,    20,    21,    23,    24,    25,
+      27,    28,    29,    31,    34,    59,    60,    61,    62,    63,
+      64,    65,    66,    68,    71,    72,    73,    74,    75,    53,
+      59,    48,    48,    48,    43,    44,    45,    46,    47,    43,
+      44,    45,    46,     5,     5,     9,     5,     5,     5,     6,
+       5,     9,     6,     5,    70,    59,    17,    60,    16,    58,
+       5,    56,    56,    56,     5,     9,     5,     9,     5,     9,
+       5,     9,     6,     9,    30,    35,    36,    70,     5,     9,
+       5,     9,     5,     9,     5,     9,    49,    49,    49,    22,
+      12,     5,     6,    12,    49,    49,    37,    38,    39,    40,
+      41,    42,    32,    17,    59,    53,    49,    50,    49,    49,
+      49,    49,    49,    49,    49,    49,     7,     8,    10,    49,
+      49,    26,     6,     9,     9,     9,     9,     9,     9,    59,
+      17,    17,    67,     5,    49,    49,     9,     5,     9,    33,
+      69,    11,    49,    49,    59,    17,     9,    49
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    31,    32,    33,    33,    34,    34,    35,    35,    35,
-      36,    36,    37,    38,    39,    39,    40,    40,    40,    40,
-      40,    41,    41,    42,    42,    42,    43,    43,    44,    45,
-      46,    46
+       0,    51,    52,    53,    53,    54,    54,    55,    55,    55,
+      56,    56,    57,    58,    59,    59,    60,    60,    60,    60,
+      60,    60,    60,    60,    61,    61,    61,    61,    61,    62,
+      62,    62,    63,    63,    63,    63,    64,    64,    65,    65,
+      65,    66,    67,    67,    68,    68,    69,    69,    70,    70,
+      70,    70,    70,    70,    70,    70,    71,    71,    71,    71,
+      72,    72,    72,    72,    73,    73,    73,    73,    74,    74,
+      74,    74,    75,    75,    75,    75
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -692,8 +787,12 @@ static const yytype_int8 yyr2[] =
 {
        0,     2,     6,     0,     1,     0,     2,     5,     5,     5,
        1,     3,     3,     3,     1,     2,     1,     1,     1,     1,
-       1,     4,     4,     6,     6,     8,     5,     5,     4,     3,
-       0,     1
+       1,     1,     1,     1,     4,     4,     4,     4,     4,     6,
+       6,     8,     5,     5,     3,     3,     4,     4,     3,     3,
+       4,     3,     0,     1,     6,     3,     0,     2,     1,     3,
+       3,     3,     3,     3,     3,     3,     1,     1,     1,     1,
+       3,     3,     3,     3,     3,     3,     3,     3,     3,     3,
+       3,     3,     3,     3,     3,     3
 };
 
 
@@ -1157,7 +1256,7 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* programa: declaracoes config bloco_opt repita bloco_opt fim_opt  */
-#line 48 "parser.y"
+#line 52 "parser.y"
                                                           { 
         printf("Programa reconhecido com sucesso!\n"); 
         (yyval.node) = newNode("PROGRAMA", 6, (yyvsp[-5].node), (yyvsp[-4].node), (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node));
@@ -1168,39 +1267,39 @@ yyreduce:
         printf("[DEBUG] Árvore sintática gerada, iniciando impressão...\n");
         printTree((yyval.node), 0); // Para exibir a árvore sintática
     }
-#line 1172 "parser.tab.c"
+#line 1271 "parser.tab.c"
     break;
 
   case 3: /* bloco_opt: %empty  */
-#line 61 "parser.y"
+#line 65 "parser.y"
     { (yyval.node) = newNode("BLOCO_VAZIO", 0); }
-#line 1178 "parser.tab.c"
+#line 1277 "parser.tab.c"
     break;
 
   case 4: /* bloco_opt: bloco  */
-#line 62 "parser.y"
+#line 66 "parser.y"
             { (yyval.node) = (yyvsp[0].node); }
-#line 1184 "parser.tab.c"
+#line 1283 "parser.tab.c"
     break;
 
   case 5: /* declaracoes: %empty  */
-#line 67 "parser.y"
+#line 71 "parser.y"
     { (yyval.node) = newNode("DECLARACOES", 0); }
-#line 1190 "parser.tab.c"
+#line 1289 "parser.tab.c"
     break;
 
   case 6: /* declaracoes: declaracoes declaracao  */
-#line 68 "parser.y"
+#line 72 "parser.y"
                              { addChild((yyvsp[-1].node), (yyvsp[0].node)); (yyval.node) = (yyvsp[-1].node); }
-#line 1196 "parser.tab.c"
+#line 1295 "parser.tab.c"
     break;
 
   case 7: /* declaracao: VAR INTEIRO ':' lista_identificadores ';'  */
-#line 72 "parser.y"
+#line 76 "parser.y"
                                               { 
         if (!(yyvsp[-1].node)) {
             printf("[ERRO] lista_identificadores retornou NULL!\n");
-            (yyval.node) = newNode("DECLARACAO", 1, newNode(strdup("INTEIRO"), 0)); // Nó mínimo
+            (yyval.node) = newNode("DECLARACAO", 1, newNode(strdup("INTEIRO"), 0));
         } else {
             (yyval.node) = newNode("DECLARACAO", 2, newNode(strdup("INTEIRO"), 0), (yyvsp[-1].node));
         }
@@ -1210,10 +1309,9 @@ yyreduce:
             if (idList->numChildren > 0 && idList->children[0] != NULL) {
                 Node *identNode = idList->children[0];  
                 
-                // 🔥 Certificando-se de que pegamos o nome correto da variável
                 char *varName = (strcmp(identNode->label, "IDENTIFICADOR") == 0 && identNode->numChildren > 0) 
-                                ? identNode->children[0]->label  // Pegando o filho correto
-                                : identNode->label;  // Já é o nome correto
+                                ? identNode->children[0]->label
+                                : identNode->label;
                 
                 if (lookupSymbol(varName) != NULL) {
                     printf("Erro Semântico: Variável '%s' já declarada!\n", varName);
@@ -1225,11 +1323,11 @@ yyreduce:
             printSymbolTable();
         }
     }
-#line 1229 "parser.tab.c"
+#line 1327 "parser.tab.c"
     break;
 
   case 8: /* declaracao: VAR TEXTO ':' lista_identificadores ';'  */
-#line 100 "parser.y"
+#line 103 "parser.y"
                                               { 
         if (!(yyvsp[-1].node)) {
             printf("[ERRO] lista_identificadores retornou NULL!\n");
@@ -1258,11 +1356,11 @@ yyreduce:
             printSymbolTable();
         }
     }
-#line 1262 "parser.tab.c"
+#line 1360 "parser.tab.c"
     break;
 
   case 9: /* declaracao: VAR BOOLEANO ':' lista_identificadores ';'  */
-#line 128 "parser.y"
+#line 131 "parser.y"
                                                  { 
         if (!(yyvsp[-1].node)) {
             printf("[ERRO] lista_identificadores retornou NULL!\n");
@@ -1291,90 +1389,108 @@ yyreduce:
             printSymbolTable();
         }
     }
-#line 1295 "parser.tab.c"
+#line 1393 "parser.tab.c"
     break;
 
   case 10: /* lista_identificadores: IDENTIFICADOR  */
-#line 159 "parser.y"
+#line 162 "parser.y"
                   { (yyval.node) = newNode("LISTA_IDENTIFICADORES", 1, newNode("IDENTIFICADOR", 1, newNode((yyvsp[0].strval), 0))); }
-#line 1301 "parser.tab.c"
+#line 1399 "parser.tab.c"
     break;
 
   case 11: /* lista_identificadores: lista_identificadores ',' IDENTIFICADOR  */
-#line 160 "parser.y"
+#line 163 "parser.y"
                                               {
       addChild((yyvsp[-2].node), newNode("IDENTIFICADOR", 1, newNode((yyvsp[0].strval), 0)));
       (yyval.node) = (yyvsp[-2].node);}
-#line 1309 "parser.tab.c"
+#line 1407 "parser.tab.c"
     break;
 
   case 12: /* config: CONFIG bloco FIM  */
-#line 167 "parser.y"
+#line 170 "parser.y"
                      { 
         printf("Configuração processada.\n");
         printf("[DEBUG] Criando nó CONFIG, bloco=%p\n", (void*)(yyvsp[-1].node));
         (yyval.node) = newNode("CONFIG", 2, (yyvsp[-1].node), newNode("FIM", 0));  // Criando o nó corretamente
     }
-#line 1319 "parser.tab.c"
+#line 1417 "parser.tab.c"
     break;
 
   case 13: /* repita: REPITA bloco FIM  */
-#line 176 "parser.y"
+#line 179 "parser.y"
                      { 
         printf("Loop principal processado.\n");
         printf("[DEBUG] Criando nó para LOOP PRINCIPAL\n");
         (yyval.node) = newNode("REPITA", 2, (yyvsp[-1].node), newNode("FIM", 0));  // Criando o nó corretamente
     }
-#line 1329 "parser.tab.c"
+#line 1427 "parser.tab.c"
     break;
 
   case 14: /* bloco: comando  */
-#line 185 "parser.y"
+#line 188 "parser.y"
             { (yyval.node) = newNode("BLOCO", 1, (yyvsp[0].node)); }
-#line 1335 "parser.tab.c"
+#line 1433 "parser.tab.c"
     break;
 
   case 15: /* bloco: bloco comando  */
-#line 186 "parser.y"
+#line 189 "parser.y"
                     { 
         addChild((yyvsp[-1].node), (yyvsp[0].node));
         (yyval.node) = (yyvsp[-1].node);
     }
-#line 1344 "parser.tab.c"
+#line 1442 "parser.tab.c"
     break;
 
   case 16: /* comando: atribuicao  */
-#line 194 "parser.y"
+#line 197 "parser.y"
                { (yyval.node) = (yyvsp[0].node); }
-#line 1350 "parser.tab.c"
+#line 1448 "parser.tab.c"
     break;
 
   case 17: /* comando: operacao_pwm  */
-#line 195 "parser.y"
+#line 198 "parser.y"
                    { (yyval.node) = (yyvsp[0].node); }
-#line 1356 "parser.tab.c"
+#line 1454 "parser.tab.c"
     break;
 
   case 18: /* comando: operacao_io  */
-#line 196 "parser.y"
+#line 199 "parser.y"
                   { (yyval.node) = (yyvsp[0].node); }
-#line 1362 "parser.tab.c"
+#line 1460 "parser.tab.c"
     break;
 
   case 19: /* comando: operacao_wifi  */
-#line 197 "parser.y"
+#line 200 "parser.y"
                     { (yyval.node) = (yyvsp[0].node); }
-#line 1368 "parser.tab.c"
+#line 1466 "parser.tab.c"
     break;
 
   case 20: /* comando: operacao_controle  */
-#line 198 "parser.y"
+#line 201 "parser.y"
                         { (yyval.node) = (yyvsp[0].node); }
-#line 1374 "parser.tab.c"
+#line 1472 "parser.tab.c"
     break;
 
-  case 21: /* atribuicao: IDENTIFICADOR '=' NUMERO ';'  */
+  case 21: /* comando: operacao_serial  */
+#line 202 "parser.y"
+                      { (yyval.node) = (yyvsp[0].node); }
+#line 1478 "parser.tab.c"
+    break;
+
+  case 22: /* comando: operacao_condicional  */
 #line 203 "parser.y"
+                           { (yyval.node) = (yyvsp[0].node); }
+#line 1484 "parser.tab.c"
+    break;
+
+  case 23: /* comando: operacoes_aritmeticas  */
+#line 204 "parser.y"
+                            { (yyval.node) = (yyvsp[0].node); }
+#line 1490 "parser.tab.c"
+    break;
+
+  case 24: /* atribuicao: IDENTIFICADOR '=' NUMERO ';'  */
+#line 209 "parser.y"
                                  { 
         checkVariableType((yyvsp[-3].strval), "INTEIRO");
         printf("Atribuição: %s = %d\n", (yyvsp[-3].strval), (yyvsp[-1].intval));
@@ -1382,21 +1498,50 @@ yyreduce:
         sprintf(buffer, "%d", (yyvsp[-1].intval)); // Converte inteiro para string
         (yyval.node) = newNode("ATRIBUICAO", 2, newNode((yyvsp[-3].strval), 0), newNode("NUMERO", 1, newNode(strdup(buffer), 0))); 
     }
-#line 1386 "parser.tab.c"
+#line 1502 "parser.tab.c"
     break;
 
-  case 22: /* atribuicao: IDENTIFICADOR '=' STRING ';'  */
-#line 210 "parser.y"
+  case 25: /* atribuicao: IDENTIFICADOR '=' STRING ';'  */
+#line 216 "parser.y"
                                    { 
         checkVariableType((yyvsp[-3].strval), "TEXTO");
         printf("Atribuição: %s = %s\n", (yyvsp[-3].strval), (yyvsp[-1].strval));
         (yyval.node) = newNode("ATRIBUICAO", 2, newNode((yyvsp[-3].strval), 0), newNode("STRING", 1, newNode((yyvsp[-1].strval), 0))); 
     }
-#line 1396 "parser.tab.c"
+#line 1512 "parser.tab.c"
     break;
 
-  case 23: /* operacao_pwm: AJUSTARPWM IDENTIFICADOR COM VALOR NUMERO ';'  */
-#line 219 "parser.y"
+  case 26: /* atribuicao: IDENTIFICADOR '=' VERDADEIRO ';'  */
+#line 221 "parser.y"
+                                       { 
+        checkVariableType((yyvsp[-3].strval), "BOOLEANO");
+        printf("Atribuição: %s = VERDADEIRO\n", (yyvsp[-3].strval));
+        (yyval.node) = newNode("ATRIBUICAO", 2, newNode((yyvsp[-3].strval), 0), newNode("BOOLEANO", 1, newNode("VERDADEIRO", 0))); 
+    }
+#line 1522 "parser.tab.c"
+    break;
+
+  case 27: /* atribuicao: IDENTIFICADOR '=' FALSO ';'  */
+#line 226 "parser.y"
+                                  { 
+        checkVariableType((yyvsp[-3].strval), "BOOLEANO");
+        printf("Atribuição: %s = FALSO\n", (yyvsp[-3].strval));
+        (yyval.node) = newNode("ATRIBUICAO", 2, newNode((yyvsp[-3].strval), 0), newNode("BOOLEANO", 1, newNode("FALSO", 0))); 
+    }
+#line 1532 "parser.tab.c"
+    break;
+
+  case 28: /* atribuicao: IDENTIFICADOR '=' expressao_logica ';'  */
+#line 231 "parser.y"
+                                             { 
+        checkVariableType((yyvsp[-3].strval), "BOOLEANO");
+        (yyval.node) = newNode("ATRIBUICAO", 2, newNode((yyvsp[-3].strval), 0), (yyvsp[-1].node)); 
+    }
+#line 1541 "parser.tab.c"
+    break;
+
+  case 29: /* operacao_pwm: AJUSTARPWM IDENTIFICADOR COM VALOR NUMERO ';'  */
+#line 239 "parser.y"
                                                   {
         checkVariableType((yyvsp[-4].strval), "INTEIRO");
         char valorStr[16];
@@ -1407,21 +1552,21 @@ yyreduce:
             newNode("VALOR", 1, newNode(strdup(valorStr), 0))  
         );
     }
-#line 1411 "parser.tab.c"
+#line 1556 "parser.tab.c"
     break;
 
-  case 24: /* operacao_pwm: AJUSTARPWM IDENTIFICADOR COM VALOR IDENTIFICADOR ';'  */
-#line 229 "parser.y"
+  case 30: /* operacao_pwm: AJUSTARPWM IDENTIFICADOR COM VALOR IDENTIFICADOR ';'  */
+#line 249 "parser.y"
                                                            { 
         checkVariableType((yyvsp[-4].strval), "INTEIRO");
         checkVariableType((yyvsp[-1].strval), "INTEIRO");
         (yyval.node) = newNode("AJUSTAR_PWM", 3, newNode((yyvsp[-4].strval), 0), newNode("VALOR", 1, newNode((yyvsp[-1].strval), 0))); 
     }
-#line 1421 "parser.tab.c"
+#line 1566 "parser.tab.c"
     break;
 
-  case 25: /* operacao_pwm: CONFIGURARPWM IDENTIFICADOR COM FREQUENCIA NUMERO RESOLUCAO NUMERO ';'  */
-#line 234 "parser.y"
+  case 31: /* operacao_pwm: CONFIGURARPWM IDENTIFICADOR COM FREQUENCIA NUMERO RESOLUCAO NUMERO ';'  */
+#line 254 "parser.y"
                                                                              {
         checkVariableType((yyvsp[-6].strval), "INTEIRO");
         char freqStr[16], resStr[16];
@@ -1434,31 +1579,49 @@ yyreduce:
             newNode("RESOLUCAO", 1, newNode(strdup(resStr), 0))  
         );
     }
-#line 1438 "parser.tab.c"
+#line 1583 "parser.tab.c"
     break;
 
-  case 26: /* operacao_io: CONFIGURAR IDENTIFICADOR COMO SAIDA ';'  */
-#line 249 "parser.y"
+  case 32: /* operacao_io: CONFIGURAR IDENTIFICADOR COMO SAIDA ';'  */
+#line 269 "parser.y"
                                             { 
         checkVariableType((yyvsp[-3].strval), "INTEIRO");
         printf("[DEBUG] Configurar %s como saída reconhecido corretamente!\n", (yyvsp[-3].strval));
         (yyval.node) = newNode("CONFIGURAR_IO", 2, newNode((yyvsp[-3].strval), 0), newNode("SAIDA", 0)); 
     }
-#line 1448 "parser.tab.c"
+#line 1593 "parser.tab.c"
     break;
 
-  case 27: /* operacao_io: CONFIGURAR IDENTIFICADOR COMO ENTRADA ';'  */
-#line 254 "parser.y"
+  case 33: /* operacao_io: CONFIGURAR IDENTIFICADOR COMO ENTRADA ';'  */
+#line 274 "parser.y"
                                                 { 
         checkVariableType((yyvsp[-3].strval), "INTEIRO");
         printf("[DEBUG] Configurar %s como entrada reconhecido corretamente!\n", (yyvsp[-3].strval));
         (yyval.node) = newNode("CONFIGURAR_IO", 2, newNode((yyvsp[-3].strval), 0), newNode("ENTRADA", 0)); 
     }
-#line 1458 "parser.tab.c"
+#line 1603 "parser.tab.c"
     break;
 
-  case 28: /* operacao_wifi: CONECTARWIFI IDENTIFICADOR IDENTIFICADOR ';'  */
-#line 263 "parser.y"
+  case 34: /* operacao_io: LIGAR IDENTIFICADOR ';'  */
+#line 279 "parser.y"
+                              { 
+        checkVariableType((yyvsp[-1].strval), "INTEIRO");
+        (yyval.node) = newNode("LIGAR", 1, newNode((yyvsp[-1].strval), 0)); 
+    }
+#line 1612 "parser.tab.c"
+    break;
+
+  case 35: /* operacao_io: DESLIGAR IDENTIFICADOR ';'  */
+#line 283 "parser.y"
+                                 { 
+        checkVariableType((yyvsp[-1].strval), "INTEIRO");
+        (yyval.node) = newNode("DESLIGAR", 1, newNode((yyvsp[-1].strval), 0)); 
+    }
+#line 1621 "parser.tab.c"
+    break;
+
+  case 36: /* operacao_wifi: CONECTARWIFI IDENTIFICADOR IDENTIFICADOR ';'  */
+#line 291 "parser.y"
                                                  { 
         checkVariableType((yyvsp[-2].strval), "TEXTO");
         checkVariableType((yyvsp[-1].strval), "TEXTO");
@@ -1466,34 +1629,433 @@ yyreduce:
         printf("[DEBUG] Criando nó para operação WiFi\n");
         (yyval.node) = newNode("CONECTAR_WIFI", 2, newNode((yyvsp[-2].strval), 0), newNode((yyvsp[-1].strval), 0)); 
     }
-#line 1470 "parser.tab.c"
+#line 1633 "parser.tab.c"
     break;
 
-  case 29: /* operacao_controle: ESPERAR NUMERO ';'  */
-#line 274 "parser.y"
+  case 37: /* operacao_wifi: ENVIARHTTP STRING STRING ';'  */
+#line 298 "parser.y"
+                                   {
+         (yyval.node) = newNode("ENVIAR_HTTP", 2, newNode((yyvsp[-2].strval), 0), newNode((yyvsp[-1].strval), 0));
+    }
+#line 1641 "parser.tab.c"
+    break;
+
+  case 38: /* operacao_serial: CONFIGURARSERIAL NUMERO ';'  */
+#line 304 "parser.y"
+                                {
+        if ((yyvsp[-1].intval) < 300 || (yyvsp[-1].intval) > 115200) {
+            printf("Erro Semântico: Taxa de transmissão inválida '%d'. Deve estar entre 300 e 115200.\n", (yyvsp[-1].intval));
+            exit(1);
+        }
+        char buffer[10];
+        sprintf(buffer, "%d", (yyvsp[-1].intval));
+        (yyval.node) = newNode("CONFIGURAR_SERIAL", 1, newNode(strdup(buffer), 0)); 
+    }
+#line 1655 "parser.tab.c"
+    break;
+
+  case 39: /* operacao_serial: ESCREVERSERIAL STRING ';'  */
+#line 313 "parser.y"
+                                {
+        (yyval.node) = newNode("ESCREVER_SERIAL", 1, newNode((yyvsp[-1].strval), 0));
+    }
+#line 1663 "parser.tab.c"
+    break;
+
+  case 40: /* operacao_serial: IDENTIFICADOR '=' LERSERIAL ';'  */
+#line 316 "parser.y"
+                                      {
+        checkVariableType((yyvsp[-3].strval), "TEXTO");
+        (yyval.node) = newNode("LER_SERIAL", 1, newNode((yyvsp[-3].strval), 0));
+    }
+#line 1672 "parser.tab.c"
+    break;
+
+  case 41: /* operacao_controle: ESPERAR NUMERO ';'  */
+#line 324 "parser.y"
                        { 
         printf("Esperar: %d ms\n", (yyvsp[-1].intval));
         char buffer[20];
         sprintf(buffer, "%d", (yyvsp[-1].intval));
         (yyval.node) = newNode("ESPERAR", 1, newNode(strdup(buffer), 0)); 
     }
-#line 1481 "parser.tab.c"
+#line 1683 "parser.tab.c"
     break;
 
-  case 30: /* fim_opt: %empty  */
-#line 283 "parser.y"
+  case 42: /* fim_opt: %empty  */
+#line 333 "parser.y"
     { (yyval.node) = newNode("FIM_VAZIO", 0); }
-#line 1487 "parser.tab.c"
+#line 1689 "parser.tab.c"
     break;
 
-  case 31: /* fim_opt: FIM  */
-#line 284 "parser.y"
+  case 43: /* fim_opt: FIM  */
+#line 334 "parser.y"
           { (yyval.node) = newNode("FIM", 0); }
-#line 1493 "parser.tab.c"
+#line 1695 "parser.tab.c"
+    break;
+
+  case 44: /* operacao_condicional: SE expressao_logica ENTAO bloco senao_opt FIM  */
+#line 338 "parser.y"
+                                                  {
+        printf("Estrutura Condicional (se ... então ... fim)\n");
+        (yyval.node) = newNode("CONDICIONAL", 3, (yyvsp[-4].node), (yyvsp[-2].node), (yyvsp[-1].node), 0);
+    }
+#line 1704 "parser.tab.c"
+    break;
+
+  case 45: /* operacao_condicional: ENQUANTO bloco FIM  */
+#line 342 "parser.y"
+                         {
+        printf("Estrutura de Repetição (enquanto ... fim)\n");
+        (yyval.node) = newNode("ENQUANTO", 1, (yyvsp[-1].node), 0);
+    }
+#line 1713 "parser.tab.c"
+    break;
+
+  case 46: /* senao_opt: %empty  */
+#line 349 "parser.y"
+    { (yyval.node) = newNode("SENAO_VAZIO", 0); }
+#line 1719 "parser.tab.c"
+    break;
+
+  case 47: /* senao_opt: SENAO bloco  */
+#line 350 "parser.y"
+                  { (yyval.node) = newNode("SENAO", 1, (yyvsp[0].node), 0); }
+#line 1725 "parser.tab.c"
+    break;
+
+  case 48: /* expressao_logica: IDENTIFICADOR  */
+#line 354 "parser.y"
+                  {
+        checkVariableType((yyvsp[0].strval), "BOOLEANO");
+
+        (yyval.node) = newNode("EXPRESSAO_LOGICA", 1, newNode((yyvsp[0].strval), 0));
+    }
+#line 1735 "parser.tab.c"
+    break;
+
+  case 49: /* expressao_logica: IDENTIFICADOR IGUAL NUMERO  */
+#line 359 "parser.y"
+                                 {
+        printf("Comparação: %s == %d\n", (yyvsp[-2].strval), (yyvsp[0].intval));
+
+        checkVariableType((yyvsp[-2].strval), "INTEIRO");
+
+        char valorStr[16];
+        sprintf(valorStr, "%d", (yyvsp[0].intval));
+        (yyval.node) = newNode("EXPRESSAO_LOGICA", 3, newNode((yyvsp[-2].strval), 0), newNode("==", 0), newNode(valorStr, 0));
+    }
+#line 1749 "parser.tab.c"
+    break;
+
+  case 50: /* expressao_logica: IDENTIFICADOR DIFERENTE NUMERO  */
+#line 368 "parser.y"
+                                     {
+        printf("Comparação: %s == %d\n", (yyvsp[-2].strval), (yyvsp[0].intval));
+
+        checkVariableType((yyvsp[-2].strval), "INTEIRO");
+
+        char valorStr[16];
+        sprintf(valorStr, "%d", (yyvsp[0].intval));
+        (yyval.node) = newNode("EXPRESSAO_LOGICA", 3, newNode((yyvsp[-2].strval), 0), newNode("!=", 0), newNode(valorStr, 0));
+    }
+#line 1763 "parser.tab.c"
+    break;
+
+  case 51: /* expressao_logica: IDENTIFICADOR MENOR_QUE NUMERO  */
+#line 377 "parser.y"
+                                     {
+        printf("Comparação: %s == %d\n", (yyvsp[-2].strval), (yyvsp[0].intval));
+
+        checkVariableType((yyvsp[-2].strval), "INTEIRO");
+
+        char valorStr[16];
+        sprintf(valorStr, "%d", (yyvsp[0].intval));
+        (yyval.node) = newNode("EXPRESSAO_LOGICA", 3, newNode((yyvsp[-2].strval), 0), newNode("<", 0), newNode(valorStr, 0));
+    }
+#line 1777 "parser.tab.c"
+    break;
+
+  case 52: /* expressao_logica: IDENTIFICADOR MAIOR_QUE NUMERO  */
+#line 386 "parser.y"
+                                     {
+        printf("Comparação: %s == %d\n", (yyvsp[-2].strval), (yyvsp[0].intval));
+
+        checkVariableType((yyvsp[-2].strval), "INTEIRO");
+
+        char valorStr[16];
+        sprintf(valorStr, "%d", (yyvsp[0].intval));
+        (yyval.node) = newNode("EXPRESSAO_LOGICA", 3, newNode((yyvsp[-2].strval), 0), newNode(">", 0), newNode(valorStr, 0));
+    }
+#line 1791 "parser.tab.c"
+    break;
+
+  case 53: /* expressao_logica: IDENTIFICADOR MAIOR_IGUAL NUMERO  */
+#line 395 "parser.y"
+                                       {
+        printf("Comparação: %s == %d\n", (yyvsp[-2].strval), (yyvsp[0].intval));
+
+        checkVariableType((yyvsp[-2].strval), "INTEIRO");
+
+        char valorStr[16];
+        sprintf(valorStr, "%d", (yyvsp[0].intval));
+        (yyval.node) = newNode("EXPRESSAO_LOGICA", 3, newNode((yyvsp[-2].strval), 0), newNode(">=", 0), newNode(valorStr, 0));
+    }
+#line 1805 "parser.tab.c"
+    break;
+
+  case 54: /* expressao_logica: IDENTIFICADOR MENOR_IGUAL NUMERO  */
+#line 404 "parser.y"
+                                       {
+        printf("Comparação: %s == %d\n", (yyvsp[-2].strval), (yyvsp[0].intval));
+
+        checkVariableType((yyvsp[-2].strval), "INTEIRO");
+
+        char valorStr[16];
+        sprintf(valorStr, "%d", (yyvsp[0].intval));
+        (yyval.node) = newNode("EXPRESSAO_LOGICA", 3, newNode((yyvsp[-2].strval), 0), newNode("<=", 0), newNode(valorStr, 0));
+    }
+#line 1819 "parser.tab.c"
+    break;
+
+  case 55: /* expressao_logica: IDENTIFICADOR IGUAL STRING  */
+#line 413 "parser.y"
+                                 {
+        printf("Comparação: %s == %s\n", (yyvsp[-2].strval), (yyvsp[0].strval));
+
+        checkVariableType((yyvsp[-2].strval), "TEXTO");
+
+        (yyval.node) = newNode("EXPRESSAO_LOGICA", 3, newNode((yyvsp[-2].strval), 0), newNode("==", 0), newNode((yyvsp[0].strval), 0));
+    }
+#line 1831 "parser.tab.c"
+    break;
+
+  case 56: /* operacoes_aritmeticas: operacao_soma  */
+#line 423 "parser.y"
+                  { (yyval.node) = (yyvsp[0].node);}
+#line 1837 "parser.tab.c"
+    break;
+
+  case 57: /* operacoes_aritmeticas: operacao_subtracao  */
+#line 424 "parser.y"
+                         { (yyval.node) = (yyvsp[0].node);}
+#line 1843 "parser.tab.c"
+    break;
+
+  case 58: /* operacoes_aritmeticas: operacao_multiplicacao  */
+#line 425 "parser.y"
+                             { (yyval.node) = (yyvsp[0].node);}
+#line 1849 "parser.tab.c"
+    break;
+
+  case 59: /* operacoes_aritmeticas: operacao_divisao  */
+#line 426 "parser.y"
+                       { (yyval.node) = (yyvsp[0].node);}
+#line 1855 "parser.tab.c"
+    break;
+
+  case 60: /* operacao_soma: IDENTIFICADOR SOMA IDENTIFICADOR  */
+#line 429 "parser.y"
+                                     {
+        checkVariableType((yyvsp[-2].strval), "INTEIRO");
+        checkVariableType((yyvsp[0].strval), "INTEIRO");
+
+        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode((yyvsp[-2].strval), 0), newNode("+", 0), newNode((yyvsp[0].strval), 0));
+    }
+#line 1866 "parser.tab.c"
+    break;
+
+  case 61: /* operacao_soma: IDENTIFICADOR SOMA NUMERO  */
+#line 435 "parser.y"
+                                {
+        checkVariableType((yyvsp[-2].strval), "INTEIRO");
+
+        char valorStr[16];
+        sprintf(valorStr, "%d", (yyvsp[0].intval));
+
+        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode((yyvsp[-2].strval), 0), newNode("+", 0), newNode(valorStr, 0));
+    }
+#line 1879 "parser.tab.c"
+    break;
+
+  case 62: /* operacao_soma: NUMERO SOMA IDENTIFICADOR  */
+#line 443 "parser.y"
+                                {
+        checkVariableType((yyvsp[0].strval), "INTEIRO");
+
+        char valorStr[16];
+        sprintf(valorStr, "%d", (yyvsp[-2].intval));
+
+        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode(valorStr, 0), newNode("+", 0), newNode((yyvsp[0].strval), 0));
+    }
+#line 1892 "parser.tab.c"
+    break;
+
+  case 63: /* operacao_soma: NUMERO SOMA NUMERO  */
+#line 451 "parser.y"
+                         {
+        char valorStr1[16];
+        char valorStr2[16];
+        sprintf(valorStr1, "%d", (yyvsp[-2].intval));
+        sprintf(valorStr1, "%d", (yyvsp[0].intval));
+
+        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode(valorStr1, 0), newNode("+", 0), newNode(valorStr2, 0));
+    }
+#line 1905 "parser.tab.c"
+    break;
+
+  case 64: /* operacao_subtracao: IDENTIFICADOR SUBTRACAO IDENTIFICADOR  */
+#line 462 "parser.y"
+                                          {
+        checkVariableType((yyvsp[-2].strval), "INTEIRO");
+        checkVariableType((yyvsp[0].strval), "INTEIRO");
+
+        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode((yyvsp[-2].strval), 0), newNode("-", 0), newNode((yyvsp[0].strval), 0));
+    }
+#line 1916 "parser.tab.c"
+    break;
+
+  case 65: /* operacao_subtracao: IDENTIFICADOR SUBTRACAO NUMERO  */
+#line 468 "parser.y"
+                                     {
+        checkVariableType((yyvsp[-2].strval), "INTEIRO");
+
+        char valorStr[16];
+        sprintf(valorStr, "%d", (yyvsp[0].intval));
+
+        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode((yyvsp[-2].strval), 0), newNode("-", 0), newNode(valorStr, 0));
+    }
+#line 1929 "parser.tab.c"
+    break;
+
+  case 66: /* operacao_subtracao: NUMERO SUBTRACAO IDENTIFICADOR  */
+#line 476 "parser.y"
+                                     {
+        checkVariableType((yyvsp[0].strval), "INTEIRO");
+
+        char valorStr[16];
+        sprintf(valorStr, "%d", (yyvsp[-2].intval));
+
+        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode(valorStr, 0), newNode("-", 0), newNode((yyvsp[0].strval), 0));
+    }
+#line 1942 "parser.tab.c"
+    break;
+
+  case 67: /* operacao_subtracao: NUMERO SUBTRACAO NUMERO  */
+#line 484 "parser.y"
+                              {
+        char valorStr1[16];
+        char valorStr2[16];
+        sprintf(valorStr1, "%d", (yyvsp[-2].intval));
+        sprintf(valorStr1, "%d", (yyvsp[0].intval));
+
+        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode(valorStr1, 0), newNode("-", 0), newNode(valorStr2, 0));
+    }
+#line 1955 "parser.tab.c"
+    break;
+
+  case 68: /* operacao_multiplicacao: IDENTIFICADOR MULTIPLICACAO IDENTIFICADOR  */
+#line 495 "parser.y"
+                                              {
+        checkVariableType((yyvsp[-2].strval), "INTEIRO");
+        checkVariableType((yyvsp[0].strval), "INTEIRO");
+
+        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode((yyvsp[-2].strval), 0), newNode("*", 0), newNode((yyvsp[0].strval), 0));
+    }
+#line 1966 "parser.tab.c"
+    break;
+
+  case 69: /* operacao_multiplicacao: IDENTIFICADOR MULTIPLICACAO NUMERO  */
+#line 501 "parser.y"
+                                         {
+        checkVariableType((yyvsp[-2].strval), "INTEIRO");
+
+        char valorStr[16];
+        sprintf(valorStr, "%d", (yyvsp[0].intval));
+
+        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode((yyvsp[-2].strval), 0), newNode("*", 0), newNode(valorStr, 0));
+    }
+#line 1979 "parser.tab.c"
+    break;
+
+  case 70: /* operacao_multiplicacao: NUMERO MULTIPLICACAO IDENTIFICADOR  */
+#line 509 "parser.y"
+                                         {
+        checkVariableType((yyvsp[0].strval), "INTEIRO");
+
+        char valorStr[16];
+        sprintf(valorStr, "%d", (yyvsp[-2].intval));
+
+        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode(valorStr, 0), newNode("*", 0), newNode((yyvsp[0].strval), 0));
+    }
+#line 1992 "parser.tab.c"
+    break;
+
+  case 71: /* operacao_multiplicacao: NUMERO MULTIPLICACAO NUMERO  */
+#line 517 "parser.y"
+                                  {
+        char valorStr1[16];
+        char valorStr2[16];
+        sprintf(valorStr1, "%d", (yyvsp[-2].intval));
+        sprintf(valorStr1, "%d", (yyvsp[0].intval));
+
+        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode(valorStr1, 0), newNode("*", 0), newNode(valorStr2, 0));
+    }
+#line 2005 "parser.tab.c"
+    break;
+
+  case 72: /* operacao_divisao: IDENTIFICADOR DIVISAO IDENTIFICADOR  */
+#line 528 "parser.y"
+                                        {
+        checkVariableType((yyvsp[-2].strval), "INTEIRO");
+        checkVariableType((yyvsp[0].strval), "INTEIRO");
+
+        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode((yyvsp[-2].strval), 0), newNode("/", 0), newNode((yyvsp[0].strval), 0));
+    }
+#line 2016 "parser.tab.c"
+    break;
+
+  case 73: /* operacao_divisao: IDENTIFICADOR DIVISAO NUMERO  */
+#line 534 "parser.y"
+                                   {
+        checkVariableType((yyvsp[-2].strval), "INTEIRO");
+
+        char valorStr[16];
+        sprintf(valorStr, "%d", (yyvsp[0].intval));
+
+        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode((yyvsp[-2].strval), 0), newNode("/", 0), newNode(valorStr, 0));
+    }
+#line 2029 "parser.tab.c"
+    break;
+
+  case 74: /* operacao_divisao: NUMERO DIVISAO IDENTIFICADOR  */
+#line 542 "parser.y"
+                                   {
+        checkVariableType((yyvsp[0].strval), "INTEIRO");
+
+        char valorStr[16];
+        sprintf(valorStr, "%d", (yyvsp[-2].intval));
+
+        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode(valorStr, 0), newNode("/", 0), newNode((yyvsp[0].strval), 0));
+    }
+#line 2042 "parser.tab.c"
+    break;
+
+  case 75: /* operacao_divisao: NUMERO DIVISAO NUMERO  */
+#line 550 "parser.y"
+                            {
+        char valorStr1[16];
+        char valorStr2[16];
+        sprintf(valorStr1, "%d", (yyvsp[-2].intval));
+        sprintf(valorStr1, "%d", (yyvsp[0].intval));
+
+        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode(valorStr1, 0), newNode("/", 0), newNode(valorStr2, 0));
+    }
+#line 2055 "parser.tab.c"
     break;
 
 
-#line 1497 "parser.tab.c"
+#line 2059 "parser.tab.c"
 
       default: break;
     }
@@ -1686,7 +2248,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 287 "parser.y"
+#line 560 "parser.y"
 
 void yyerror(const char *s) {
     fprintf(stderr, "Erro sintático na linha %d: %s\n", yylineno - 1, s);

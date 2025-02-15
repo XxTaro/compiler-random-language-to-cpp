@@ -34,7 +34,7 @@ Symbol *lookupSymbol(char *name) {
 
 void checkVariableType(char *name, const char *expectedType) {
     Symbol *symbol = lookupSymbol(name);
-    if (symbol == NULL) {|
+    if (symbol == NULL) {
         printf("Erro Semântico: Variável '%s' não foi declarada antes do uso.\n", name);
         exit(1);
     }

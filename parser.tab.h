@@ -82,8 +82,28 @@ extern int yydebug;
     COMO = 277,                    /* COMO  */
     CONFIGURARPWM = 278,           /* CONFIGURARPWM  */
     CONECTARWIFI = 279,            /* CONECTARWIFI  */
-    VALOR = 280,                   /* VALOR  */
-    AJUSTARPWM = 281               /* AJUSTARPWM  */
+    ENVIARHTTP = 280,              /* ENVIARHTTP  */
+    VALOR = 281,                   /* VALOR  */
+    AJUSTARPWM = 282,              /* AJUSTARPWM  */
+    CONFIGURARSERIAL = 283,        /* CONFIGURARSERIAL  */
+    ESCREVERSERIAL = 284,          /* ESCREVERSERIAL  */
+    LERSERIAL = 285,               /* LERSERIAL  */
+    SE = 286,                      /* SE  */
+    ENTAO = 287,                   /* ENTAO  */
+    SENAO = 288,                   /* SENAO  */
+    ENQUANTO = 289,                /* ENQUANTO  */
+    VERDADEIRO = 290,              /* VERDADEIRO  */
+    FALSO = 291,                   /* FALSO  */
+    IGUAL = 292,                   /* IGUAL  */
+    DIFERENTE = 293,               /* DIFERENTE  */
+    MENOR_QUE = 294,               /* MENOR_QUE  */
+    MAIOR_QUE = 295,               /* MAIOR_QUE  */
+    MAIOR_IGUAL = 296,             /* MAIOR_IGUAL  */
+    MENOR_IGUAL = 297,             /* MENOR_IGUAL  */
+    SOMA = 298,                    /* SOMA  */
+    SUBTRACAO = 299,               /* SUBTRACAO  */
+    MULTIPLICACAO = 300,           /* MULTIPLICACAO  */
+    DIVISAO = 301                  /* DIVISAO  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -98,7 +118,7 @@ union YYSTYPE
     char *strval;   // Para identificadores e strings
     Node *node;
 
-#line 102 "parser.tab.h"
+#line 122 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
