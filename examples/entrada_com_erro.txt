@@ -1,0 +1,10 @@
+config
+    configurar ledPin como saida; // Configura¸ c~ ao do pino como sa´ ıda
+fim
+
+repita
+    ligar ledPin; // Liga o LED conectado ao pino
+    esperar 1000; // Pausa por 1 segundo
+    desligar ledPin; // Desliga o LED
+    esperar 1000; // Pausa por 1 segundo
+fim

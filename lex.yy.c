@@ -363,9 +363,9 @@ struct yy_trans_info
 static const flex_int16_t yy_accept[209] =
     {   0,
         0,    0,   54,   52,    1,    3,   52,   52,   44,   42,
-       41,   43,   45,   34,   40,   39,   48,   38,   49,   37,
+       41,   43,   45,   32,   40,   39,   48,   38,   49,   37,
        37,   37,   37,   37,   37,   37,   37,   37,   37,   37,
-       37,   37,    1,   47,    0,   35,    0,    2,   34,   51,
+       37,   37,    1,   47,    0,   33,    0,    2,   32,   51,
        46,   50,   37,   37,   37,   37,   37,   37,   37,   37,
        37,   37,   37,   37,   37,   37,   37,   28,   37,   37,
        37,    2,   37,   37,   25,   37,   37,   37,   37,   37,
@@ -375,14 +375,14 @@ static const flex_int16_t yy_accept[209] =
 
        37,   37,   37,   37,   37,   37,   37,   37,   37,   37,
        37,   37,   37,   37,   37,   37,   29,   37,   37,   37,
-       37,   33,   37,   37,   37,   11,   37,   37,   36,   30,
+       37,   35,   37,   37,   37,   11,   37,   37,   36,   30,
         6,   26,   37,   37,   37,   37,    8,   37,   37,   37,
        37,   37,   37,   37,   37,   37,    9,   37,   37,   37,
        37,   37,   37,   37,   37,   17,   37,   37,   13,   37,
         5,   37,   37,   37,   37,    7,   37,   37,   12,   31,
        37,   37,   37,   37,   37,   37,   37,   37,   37,   37,
        37,   37,   24,   19,   37,   27,   37,   14,   21,   37,
-       18,   32,   37,   37,   37,   37,   20,   37,   37,   37,
+       18,   34,   37,   37,   37,   37,   20,   37,   37,   37,
 
        15,   37,   37,   37,   23,   37,   22,    0
     } ;
@@ -1011,24 +1011,24 @@ return ENQUANTO;
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 84 "lexer.l"
-return VERDADEIRO;
+#line 85 "lexer.l"
+{ yylval.intval = atoi(yytext); return NUMERO; }
 	YY_BREAK
 case 33:
+/* rule 33 can match eol */
 YY_RULE_SETUP
-#line 85 "lexer.l"
-return FALSO;
+#line 86 "lexer.l"
+{ yylval.strval = strdup(yytext); return STRING; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 87 "lexer.l"
-{ yylval.intval = atoi(yytext); return NUMERO; }
+{ yylval.strval = strdup("verdadeiro"); return VERDADEIRO; }
 	YY_BREAK
 case 35:
-/* rule 35 can match eol */
 YY_RULE_SETUP
 #line 88 "lexer.l"
-{ yylval.strval = strdup(yytext); return STRING; }
+{ yylval.strval = strdup("falso"); return FALSO; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP

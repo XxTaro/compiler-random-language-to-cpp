@@ -11,6 +11,7 @@ extern char linha_atual[];
 void yyerror(const char *s);
 int yylex();
 extern int yydebug;
+Node *syntaxTree = NULL; 
 %}
 
 %define parse.trace
@@ -51,13 +52,13 @@ extern int yydebug;
 programa:
     declaracoes config bloco_opt repita bloco_opt fim_opt { 
         printf("Programa reconhecido com sucesso!\n"); 
-        $$ = newNode("PROGRAMA", 6, $1, $2, $3, $4, $5, $6);
-        if (!$$) {
+        syntaxTree = newNode("PROGRAMA", 6, $1, $2, $3, $4, $5, $6);
+        if (!syntaxTree) {
             fprintf(stderr, "Erro: árvore sintática está NULL antes de printTree!\n");
             exit(EXIT_FAILURE);
         }
         printf("[DEBUG] Árvore sintática gerada, iniciando impressão...\n");
-        printTree($$, 0); // Para exibir a árvore sintática
+        printTree(syntaxTree, 0); // Para exibir a árvore sintática
     }
     ;
 
@@ -580,5 +581,30 @@ void yyerror(const char *s) {
 
 int main() {
     yydebug = 0;
-    return yyparse();
+
+    if (yyparse() != 0) {
+        fprintf(stderr, "[ERRO] Falha na análise sintática.\n");
+        return EXIT_FAILURE;
+    }
+
+    if (syntaxTree == NULL) {
+        fprintf(stderr, "[ERRO] Árvore sintática não foi gerada corretamente!\n");
+        return EXIT_FAILURE;
+    }
+
+    printf("[DEBUG] Gerando código C++...\n");
+
+    // Abrir o arquivo de saída para C++
+    FILE *cppFile = fopen("output/saida.cpp", "w");
+    if (!cppFile) {
+        perror("[ERRO] Não foi possível criar o arquivo de saída");
+        return EXIT_FAILURE;
+    }
+
+    generateFinalCppCode(syntaxTree, cppFile);
+    fclose(cppFile);
+
+    printf("[SUCESSO] Código C++ gerado em 'saida.cpp'.\n");
+
+    return 0;
 }

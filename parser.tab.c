@@ -81,8 +81,9 @@ extern char linha_atual[];
 void yyerror(const char *s);
 int yylex();
 extern int yydebug;
+Node *syntaxTree = NULL; 
 
-#line 86 "parser.tab.c"
+#line 87 "parser.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -576,14 +577,14 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    52,    52,    65,    66,    71,    72,    76,   103,   131,
-     162,   163,   170,   179,   188,   189,   197,   198,   199,   200,
-     201,   202,   203,   204,   209,   216,   221,   226,   231,   239,
-     249,   254,   269,   274,   279,   283,   291,   298,   304,   313,
-     316,   324,   333,   334,   338,   342,   349,   350,   354,   359,
-     368,   377,   386,   395,   404,   413,   423,   424,   425,   426,
-     429,   435,   443,   451,   462,   468,   476,   484,   495,   501,
-     509,   517,   528,   534,   542,   550
+       0,    53,    53,    66,    67,    72,    73,    77,   104,   131,
+     161,   162,   169,   178,   187,   188,   196,   197,   198,   199,
+     200,   201,   202,   203,   208,   215,   220,   225,   230,   238,
+     248,   253,   268,   273,   278,   282,   290,   297,   303,   312,
+     315,   323,   332,   333,   337,   341,   348,   349,   353,   358,
+     367,   376,   385,   394,   403,   412,   422,   423,   424,   425,
+     428,   434,   442,   450,   461,   467,   475,   483,   494,   500,
+     508,   516,   527,   533,   541,   549
 };
 #endif
 
@@ -1256,46 +1257,46 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* programa: declaracoes config bloco_opt repita bloco_opt fim_opt  */
-#line 52 "parser.y"
+#line 53 "parser.y"
                                                           { 
         printf("Programa reconhecido com sucesso!\n"); 
-        (yyval.node) = newNode("PROGRAMA", 6, (yyvsp[-5].node), (yyvsp[-4].node), (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node));
-        if (!(yyval.node)) {
+        syntaxTree = newNode("PROGRAMA", 6, (yyvsp[-5].node), (yyvsp[-4].node), (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node));
+        if (!syntaxTree) {
             fprintf(stderr, "Erro: árvore sintática está NULL antes de printTree!\n");
             exit(EXIT_FAILURE);
         }
         printf("[DEBUG] Árvore sintática gerada, iniciando impressão...\n");
-        printTree((yyval.node), 0); // Para exibir a árvore sintática
+        printTree(syntaxTree, 0); // Para exibir a árvore sintática
     }
-#line 1271 "parser.tab.c"
+#line 1272 "parser.tab.c"
     break;
 
   case 3: /* bloco_opt: %empty  */
-#line 65 "parser.y"
+#line 66 "parser.y"
     { (yyval.node) = newNode("BLOCO_VAZIO", 0); }
-#line 1277 "parser.tab.c"
+#line 1278 "parser.tab.c"
     break;
 
   case 4: /* bloco_opt: bloco  */
-#line 66 "parser.y"
+#line 67 "parser.y"
             { (yyval.node) = (yyvsp[0].node); }
-#line 1283 "parser.tab.c"
+#line 1284 "parser.tab.c"
     break;
 
   case 5: /* declaracoes: %empty  */
-#line 71 "parser.y"
+#line 72 "parser.y"
     { (yyval.node) = newNode("DECLARACOES", 0); }
-#line 1289 "parser.tab.c"
+#line 1290 "parser.tab.c"
     break;
 
   case 6: /* declaracoes: declaracoes declaracao  */
-#line 72 "parser.y"
+#line 73 "parser.y"
                              { addChild((yyvsp[-1].node), (yyvsp[0].node)); (yyval.node) = (yyvsp[-1].node); }
-#line 1295 "parser.tab.c"
+#line 1296 "parser.tab.c"
     break;
 
   case 7: /* declaracao: VAR INTEIRO ':' lista_identificadores ';'  */
-#line 76 "parser.y"
+#line 77 "parser.y"
                                               { 
         if (!(yyvsp[-1].node)) {
             printf("[ERRO] lista_identificadores retornou NULL!\n");
@@ -1323,11 +1324,11 @@ yyreduce:
             printSymbolTable();
         }
     }
-#line 1327 "parser.tab.c"
+#line 1328 "parser.tab.c"
     break;
 
   case 8: /* declaracao: VAR TEXTO ':' lista_identificadores ';'  */
-#line 103 "parser.y"
+#line 104 "parser.y"
                                               { 
         if (!(yyvsp[-1].node)) {
             printf("[ERRO] lista_identificadores retornou NULL!\n");
@@ -1341,7 +1342,6 @@ yyreduce:
             if (idList->numChildren > 0 && idList->children[0] != NULL) {
                 Node *identNode = idList->children[0];  
                 
-                // 🔥 Certificando-se de que pegamos o nome correto da variável
                 char *varName = (strcmp(identNode->label, "IDENTIFICADOR") == 0 && identNode->numChildren > 0) 
                                 ? identNode->children[0]->label  // Pegando o filho correto
                                 : identNode->label;  // Já é o nome correto
@@ -1374,7 +1374,6 @@ yyreduce:
             if (idList->numChildren > 0 && idList->children[0] != NULL) {
                 Node *identNode = idList->children[0];  
                 
-                // 🔥 Certificando-se de que pegamos o nome correto da variável
                 char *varName = (strcmp(identNode->label, "IDENTIFICADOR") == 0 && identNode->numChildren > 0) 
                                 ? identNode->children[0]->label  // Pegando o filho correto
                                 : identNode->label;  // Já é o nome correto
@@ -1389,108 +1388,108 @@ yyreduce:
             printSymbolTable();
         }
     }
-#line 1393 "parser.tab.c"
+#line 1392 "parser.tab.c"
     break;
 
   case 10: /* lista_identificadores: IDENTIFICADOR  */
-#line 162 "parser.y"
+#line 161 "parser.y"
                   { (yyval.node) = newNode("LISTA_IDENTIFICADORES", 1, newNode("IDENTIFICADOR", 1, newNode((yyvsp[0].strval), 0))); }
-#line 1399 "parser.tab.c"
+#line 1398 "parser.tab.c"
     break;
 
   case 11: /* lista_identificadores: lista_identificadores ',' IDENTIFICADOR  */
-#line 163 "parser.y"
+#line 162 "parser.y"
                                               {
       addChild((yyvsp[-2].node), newNode("IDENTIFICADOR", 1, newNode((yyvsp[0].strval), 0)));
       (yyval.node) = (yyvsp[-2].node);}
-#line 1407 "parser.tab.c"
+#line 1406 "parser.tab.c"
     break;
 
   case 12: /* config: CONFIG bloco FIM  */
-#line 170 "parser.y"
+#line 169 "parser.y"
                      { 
         printf("Configuração processada.\n");
         printf("[DEBUG] Criando nó CONFIG, bloco=%p\n", (void*)(yyvsp[-1].node));
-        (yyval.node) = newNode("CONFIG", 2, (yyvsp[-1].node), newNode("FIM", 0));  // Criando o nó corretamente
+        (yyval.node) = newNode("CONFIG", 2, (yyvsp[-1].node), newNode("FIM", 0)); 
     }
-#line 1417 "parser.tab.c"
+#line 1416 "parser.tab.c"
     break;
 
   case 13: /* repita: REPITA bloco FIM  */
-#line 179 "parser.y"
+#line 178 "parser.y"
                      { 
         printf("Loop principal processado.\n");
         printf("[DEBUG] Criando nó para LOOP PRINCIPAL\n");
-        (yyval.node) = newNode("REPITA", 2, (yyvsp[-1].node), newNode("FIM", 0));  // Criando o nó corretamente
+        (yyval.node) = newNode("REPITA", 2, (yyvsp[-1].node), newNode("FIM", 0));
     }
-#line 1427 "parser.tab.c"
+#line 1426 "parser.tab.c"
     break;
 
   case 14: /* bloco: comando  */
-#line 188 "parser.y"
+#line 187 "parser.y"
             { (yyval.node) = newNode("BLOCO", 1, (yyvsp[0].node)); }
-#line 1433 "parser.tab.c"
+#line 1432 "parser.tab.c"
     break;
 
   case 15: /* bloco: bloco comando  */
-#line 189 "parser.y"
+#line 188 "parser.y"
                     { 
         addChild((yyvsp[-1].node), (yyvsp[0].node));
         (yyval.node) = (yyvsp[-1].node);
     }
-#line 1442 "parser.tab.c"
+#line 1441 "parser.tab.c"
     break;
 
   case 16: /* comando: atribuicao  */
-#line 197 "parser.y"
+#line 196 "parser.y"
                { (yyval.node) = (yyvsp[0].node); }
-#line 1448 "parser.tab.c"
+#line 1447 "parser.tab.c"
     break;
 
   case 17: /* comando: operacao_pwm  */
-#line 198 "parser.y"
+#line 197 "parser.y"
                    { (yyval.node) = (yyvsp[0].node); }
-#line 1454 "parser.tab.c"
+#line 1453 "parser.tab.c"
     break;
 
   case 18: /* comando: operacao_io  */
-#line 199 "parser.y"
+#line 198 "parser.y"
                   { (yyval.node) = (yyvsp[0].node); }
-#line 1460 "parser.tab.c"
+#line 1459 "parser.tab.c"
     break;
 
   case 19: /* comando: operacao_wifi  */
-#line 200 "parser.y"
+#line 199 "parser.y"
                     { (yyval.node) = (yyvsp[0].node); }
-#line 1466 "parser.tab.c"
+#line 1465 "parser.tab.c"
     break;
 
   case 20: /* comando: operacao_controle  */
-#line 201 "parser.y"
+#line 200 "parser.y"
                         { (yyval.node) = (yyvsp[0].node); }
-#line 1472 "parser.tab.c"
+#line 1471 "parser.tab.c"
     break;
 
   case 21: /* comando: operacao_serial  */
-#line 202 "parser.y"
+#line 201 "parser.y"
                       { (yyval.node) = (yyvsp[0].node); }
-#line 1478 "parser.tab.c"
+#line 1477 "parser.tab.c"
     break;
 
   case 22: /* comando: operacao_condicional  */
-#line 203 "parser.y"
+#line 202 "parser.y"
                            { (yyval.node) = (yyvsp[0].node); }
-#line 1484 "parser.tab.c"
+#line 1483 "parser.tab.c"
     break;
 
   case 23: /* comando: operacoes_aritmeticas  */
-#line 204 "parser.y"
+#line 203 "parser.y"
                             { (yyval.node) = (yyvsp[0].node); }
-#line 1490 "parser.tab.c"
+#line 1489 "parser.tab.c"
     break;
 
   case 24: /* atribuicao: IDENTIFICADOR '=' NUMERO ';'  */
-#line 209 "parser.y"
+#line 208 "parser.y"
                                  { 
         checkVariableType((yyvsp[-3].strval), "INTEIRO");
         printf("Atribuição: %s = %d\n", (yyvsp[-3].strval), (yyvsp[-1].intval));
@@ -1498,50 +1497,50 @@ yyreduce:
         sprintf(buffer, "%d", (yyvsp[-1].intval)); // Converte inteiro para string
         (yyval.node) = newNode("ATRIBUICAO", 2, newNode((yyvsp[-3].strval), 0), newNode("NUMERO", 1, newNode(strdup(buffer), 0))); 
     }
-#line 1502 "parser.tab.c"
+#line 1501 "parser.tab.c"
     break;
 
   case 25: /* atribuicao: IDENTIFICADOR '=' STRING ';'  */
-#line 216 "parser.y"
+#line 215 "parser.y"
                                    { 
         checkVariableType((yyvsp[-3].strval), "TEXTO");
         printf("Atribuição: %s = %s\n", (yyvsp[-3].strval), (yyvsp[-1].strval));
         (yyval.node) = newNode("ATRIBUICAO", 2, newNode((yyvsp[-3].strval), 0), newNode("STRING", 1, newNode((yyvsp[-1].strval), 0))); 
     }
-#line 1512 "parser.tab.c"
+#line 1511 "parser.tab.c"
     break;
 
   case 26: /* atribuicao: IDENTIFICADOR '=' VERDADEIRO ';'  */
-#line 221 "parser.y"
+#line 220 "parser.y"
                                        { 
         checkVariableType((yyvsp[-3].strval), "BOOLEANO");
         printf("Atribuição: %s = VERDADEIRO\n", (yyvsp[-3].strval));
         (yyval.node) = newNode("ATRIBUICAO", 2, newNode((yyvsp[-3].strval), 0), newNode("BOOLEANO", 1, newNode("VERDADEIRO", 0))); 
     }
-#line 1522 "parser.tab.c"
+#line 1521 "parser.tab.c"
     break;
 
   case 27: /* atribuicao: IDENTIFICADOR '=' FALSO ';'  */
-#line 226 "parser.y"
+#line 225 "parser.y"
                                   { 
         checkVariableType((yyvsp[-3].strval), "BOOLEANO");
         printf("Atribuição: %s = FALSO\n", (yyvsp[-3].strval));
         (yyval.node) = newNode("ATRIBUICAO", 2, newNode((yyvsp[-3].strval), 0), newNode("BOOLEANO", 1, newNode("FALSO", 0))); 
     }
-#line 1532 "parser.tab.c"
+#line 1531 "parser.tab.c"
     break;
 
   case 28: /* atribuicao: IDENTIFICADOR '=' expressao_logica ';'  */
-#line 231 "parser.y"
+#line 230 "parser.y"
                                              { 
         checkVariableType((yyvsp[-3].strval), "BOOLEANO");
         (yyval.node) = newNode("ATRIBUICAO", 2, newNode((yyvsp[-3].strval), 0), (yyvsp[-1].node)); 
     }
-#line 1541 "parser.tab.c"
+#line 1540 "parser.tab.c"
     break;
 
   case 29: /* operacao_pwm: AJUSTARPWM IDENTIFICADOR COM VALOR NUMERO ';'  */
-#line 239 "parser.y"
+#line 238 "parser.y"
                                                   {
         checkVariableType((yyvsp[-4].strval), "INTEIRO");
         char valorStr[16];
@@ -1552,21 +1551,21 @@ yyreduce:
             newNode("VALOR", 1, newNode(strdup(valorStr), 0))  
         );
     }
-#line 1556 "parser.tab.c"
+#line 1555 "parser.tab.c"
     break;
 
   case 30: /* operacao_pwm: AJUSTARPWM IDENTIFICADOR COM VALOR IDENTIFICADOR ';'  */
-#line 249 "parser.y"
+#line 248 "parser.y"
                                                            { 
         checkVariableType((yyvsp[-4].strval), "INTEIRO");
         checkVariableType((yyvsp[-1].strval), "INTEIRO");
         (yyval.node) = newNode("AJUSTAR_PWM", 3, newNode((yyvsp[-4].strval), 0), newNode("VALOR", 1, newNode((yyvsp[-1].strval), 0))); 
     }
-#line 1566 "parser.tab.c"
+#line 1565 "parser.tab.c"
     break;
 
   case 31: /* operacao_pwm: CONFIGURARPWM IDENTIFICADOR COM FREQUENCIA NUMERO RESOLUCAO NUMERO ';'  */
-#line 254 "parser.y"
+#line 253 "parser.y"
                                                                              {
         checkVariableType((yyvsp[-6].strval), "INTEIRO");
         char freqStr[16], resStr[16];
@@ -1579,49 +1578,49 @@ yyreduce:
             newNode("RESOLUCAO", 1, newNode(strdup(resStr), 0))  
         );
     }
-#line 1583 "parser.tab.c"
+#line 1582 "parser.tab.c"
     break;
 
   case 32: /* operacao_io: CONFIGURAR IDENTIFICADOR COMO SAIDA ';'  */
-#line 269 "parser.y"
+#line 268 "parser.y"
                                             { 
         checkVariableType((yyvsp[-3].strval), "INTEIRO");
         printf("[DEBUG] Configurar %s como saída reconhecido corretamente!\n", (yyvsp[-3].strval));
         (yyval.node) = newNode("CONFIGURAR_IO", 2, newNode((yyvsp[-3].strval), 0), newNode("SAIDA", 0)); 
     }
-#line 1593 "parser.tab.c"
+#line 1592 "parser.tab.c"
     break;
 
   case 33: /* operacao_io: CONFIGURAR IDENTIFICADOR COMO ENTRADA ';'  */
-#line 274 "parser.y"
+#line 273 "parser.y"
                                                 { 
         checkVariableType((yyvsp[-3].strval), "INTEIRO");
         printf("[DEBUG] Configurar %s como entrada reconhecido corretamente!\n", (yyvsp[-3].strval));
         (yyval.node) = newNode("CONFIGURAR_IO", 2, newNode((yyvsp[-3].strval), 0), newNode("ENTRADA", 0)); 
     }
-#line 1603 "parser.tab.c"
+#line 1602 "parser.tab.c"
     break;
 
   case 34: /* operacao_io: LIGAR IDENTIFICADOR ';'  */
-#line 279 "parser.y"
+#line 278 "parser.y"
                               { 
         checkVariableType((yyvsp[-1].strval), "INTEIRO");
         (yyval.node) = newNode("LIGAR", 1, newNode((yyvsp[-1].strval), 0)); 
     }
-#line 1612 "parser.tab.c"
+#line 1611 "parser.tab.c"
     break;
 
   case 35: /* operacao_io: DESLIGAR IDENTIFICADOR ';'  */
-#line 283 "parser.y"
+#line 282 "parser.y"
                                  { 
         checkVariableType((yyvsp[-1].strval), "INTEIRO");
         (yyval.node) = newNode("DESLIGAR", 1, newNode((yyvsp[-1].strval), 0)); 
     }
-#line 1621 "parser.tab.c"
+#line 1620 "parser.tab.c"
     break;
 
   case 36: /* operacao_wifi: CONECTARWIFI IDENTIFICADOR IDENTIFICADOR ';'  */
-#line 291 "parser.y"
+#line 290 "parser.y"
                                                  { 
         checkVariableType((yyvsp[-2].strval), "TEXTO");
         checkVariableType((yyvsp[-1].strval), "TEXTO");
@@ -1629,19 +1628,19 @@ yyreduce:
         printf("[DEBUG] Criando nó para operação WiFi\n");
         (yyval.node) = newNode("CONECTAR_WIFI", 2, newNode((yyvsp[-2].strval), 0), newNode((yyvsp[-1].strval), 0)); 
     }
-#line 1633 "parser.tab.c"
+#line 1632 "parser.tab.c"
     break;
 
   case 37: /* operacao_wifi: ENVIARHTTP STRING STRING ';'  */
-#line 298 "parser.y"
+#line 297 "parser.y"
                                    {
          (yyval.node) = newNode("ENVIAR_HTTP", 2, newNode((yyvsp[-2].strval), 0), newNode((yyvsp[-1].strval), 0));
     }
-#line 1641 "parser.tab.c"
+#line 1640 "parser.tab.c"
     break;
 
   case 38: /* operacao_serial: CONFIGURARSERIAL NUMERO ';'  */
-#line 304 "parser.y"
+#line 303 "parser.y"
                                 {
         if ((yyvsp[-1].intval) < 300 || (yyvsp[-1].intval) > 115200) {
             printf("Erro Semântico: Taxa de transmissão inválida '%d'. Deve estar entre 300 e 115200.\n", (yyvsp[-1].intval));
@@ -1651,91 +1650,91 @@ yyreduce:
         sprintf(buffer, "%d", (yyvsp[-1].intval));
         (yyval.node) = newNode("CONFIGURAR_SERIAL", 1, newNode(strdup(buffer), 0)); 
     }
-#line 1655 "parser.tab.c"
+#line 1654 "parser.tab.c"
     break;
 
   case 39: /* operacao_serial: ESCREVERSERIAL STRING ';'  */
-#line 313 "parser.y"
+#line 312 "parser.y"
                                 {
         (yyval.node) = newNode("ESCREVER_SERIAL", 1, newNode((yyvsp[-1].strval), 0));
     }
-#line 1663 "parser.tab.c"
+#line 1662 "parser.tab.c"
     break;
 
   case 40: /* operacao_serial: IDENTIFICADOR '=' LERSERIAL ';'  */
-#line 316 "parser.y"
+#line 315 "parser.y"
                                       {
         checkVariableType((yyvsp[-3].strval), "TEXTO");
         (yyval.node) = newNode("LER_SERIAL", 1, newNode((yyvsp[-3].strval), 0));
     }
-#line 1672 "parser.tab.c"
+#line 1671 "parser.tab.c"
     break;
 
   case 41: /* operacao_controle: ESPERAR NUMERO ';'  */
-#line 324 "parser.y"
+#line 323 "parser.y"
                        { 
         printf("Esperar: %d ms\n", (yyvsp[-1].intval));
         char buffer[20];
         sprintf(buffer, "%d", (yyvsp[-1].intval));
         (yyval.node) = newNode("ESPERAR", 1, newNode(strdup(buffer), 0)); 
     }
-#line 1683 "parser.tab.c"
+#line 1682 "parser.tab.c"
     break;
 
   case 42: /* fim_opt: %empty  */
-#line 333 "parser.y"
+#line 332 "parser.y"
     { (yyval.node) = newNode("FIM_VAZIO", 0); }
-#line 1689 "parser.tab.c"
+#line 1688 "parser.tab.c"
     break;
 
   case 43: /* fim_opt: FIM  */
-#line 334 "parser.y"
+#line 333 "parser.y"
           { (yyval.node) = newNode("FIM", 0); }
-#line 1695 "parser.tab.c"
+#line 1694 "parser.tab.c"
     break;
 
   case 44: /* operacao_condicional: SE expressao_logica ENTAO bloco senao_opt FIM  */
-#line 338 "parser.y"
+#line 337 "parser.y"
                                                   {
         printf("Estrutura Condicional (se ... então ... fim)\n");
         (yyval.node) = newNode("CONDICIONAL", 3, (yyvsp[-4].node), (yyvsp[-2].node), (yyvsp[-1].node), 0);
     }
-#line 1704 "parser.tab.c"
+#line 1703 "parser.tab.c"
     break;
 
   case 45: /* operacao_condicional: ENQUANTO bloco FIM  */
-#line 342 "parser.y"
+#line 341 "parser.y"
                          {
         printf("Estrutura de Repetição (enquanto ... fim)\n");
         (yyval.node) = newNode("ENQUANTO", 1, (yyvsp[-1].node), 0);
     }
-#line 1713 "parser.tab.c"
+#line 1712 "parser.tab.c"
     break;
 
   case 46: /* senao_opt: %empty  */
-#line 349 "parser.y"
+#line 348 "parser.y"
     { (yyval.node) = newNode("SENAO_VAZIO", 0); }
-#line 1719 "parser.tab.c"
+#line 1718 "parser.tab.c"
     break;
 
   case 47: /* senao_opt: SENAO bloco  */
-#line 350 "parser.y"
+#line 349 "parser.y"
                   { (yyval.node) = newNode("SENAO", 1, (yyvsp[0].node), 0); }
-#line 1725 "parser.tab.c"
+#line 1724 "parser.tab.c"
     break;
 
   case 48: /* expressao_logica: IDENTIFICADOR  */
-#line 354 "parser.y"
+#line 353 "parser.y"
                   {
         checkVariableType((yyvsp[0].strval), "BOOLEANO");
 
         (yyval.node) = newNode("EXPRESSAO_LOGICA", 1, newNode((yyvsp[0].strval), 0));
     }
-#line 1735 "parser.tab.c"
+#line 1734 "parser.tab.c"
     break;
 
   case 49: /* expressao_logica: IDENTIFICADOR IGUAL NUMERO  */
-#line 359 "parser.y"
+#line 358 "parser.y"
                                  {
         printf("Comparação: %s == %d\n", (yyvsp[-2].strval), (yyvsp[0].intval));
 
@@ -1745,11 +1744,11 @@ yyreduce:
         sprintf(valorStr, "%d", (yyvsp[0].intval));
         (yyval.node) = newNode("EXPRESSAO_LOGICA", 3, newNode((yyvsp[-2].strval), 0), newNode("==", 0), newNode(valorStr, 0));
     }
-#line 1749 "parser.tab.c"
+#line 1748 "parser.tab.c"
     break;
 
   case 50: /* expressao_logica: IDENTIFICADOR DIFERENTE NUMERO  */
-#line 368 "parser.y"
+#line 367 "parser.y"
                                      {
         printf("Comparação: %s == %d\n", (yyvsp[-2].strval), (yyvsp[0].intval));
 
@@ -1759,11 +1758,11 @@ yyreduce:
         sprintf(valorStr, "%d", (yyvsp[0].intval));
         (yyval.node) = newNode("EXPRESSAO_LOGICA", 3, newNode((yyvsp[-2].strval), 0), newNode("!=", 0), newNode(valorStr, 0));
     }
-#line 1763 "parser.tab.c"
+#line 1762 "parser.tab.c"
     break;
 
   case 51: /* expressao_logica: IDENTIFICADOR MENOR_QUE NUMERO  */
-#line 377 "parser.y"
+#line 376 "parser.y"
                                      {
         printf("Comparação: %s == %d\n", (yyvsp[-2].strval), (yyvsp[0].intval));
 
@@ -1773,11 +1772,11 @@ yyreduce:
         sprintf(valorStr, "%d", (yyvsp[0].intval));
         (yyval.node) = newNode("EXPRESSAO_LOGICA", 3, newNode((yyvsp[-2].strval), 0), newNode("<", 0), newNode(valorStr, 0));
     }
-#line 1777 "parser.tab.c"
+#line 1776 "parser.tab.c"
     break;
 
   case 52: /* expressao_logica: IDENTIFICADOR MAIOR_QUE NUMERO  */
-#line 386 "parser.y"
+#line 385 "parser.y"
                                      {
         printf("Comparação: %s == %d\n", (yyvsp[-2].strval), (yyvsp[0].intval));
 
@@ -1787,11 +1786,11 @@ yyreduce:
         sprintf(valorStr, "%d", (yyvsp[0].intval));
         (yyval.node) = newNode("EXPRESSAO_LOGICA", 3, newNode((yyvsp[-2].strval), 0), newNode(">", 0), newNode(valorStr, 0));
     }
-#line 1791 "parser.tab.c"
+#line 1790 "parser.tab.c"
     break;
 
   case 53: /* expressao_logica: IDENTIFICADOR MAIOR_IGUAL NUMERO  */
-#line 395 "parser.y"
+#line 394 "parser.y"
                                        {
         printf("Comparação: %s == %d\n", (yyvsp[-2].strval), (yyvsp[0].intval));
 
@@ -1801,11 +1800,11 @@ yyreduce:
         sprintf(valorStr, "%d", (yyvsp[0].intval));
         (yyval.node) = newNode("EXPRESSAO_LOGICA", 3, newNode((yyvsp[-2].strval), 0), newNode(">=", 0), newNode(valorStr, 0));
     }
-#line 1805 "parser.tab.c"
+#line 1804 "parser.tab.c"
     break;
 
   case 54: /* expressao_logica: IDENTIFICADOR MENOR_IGUAL NUMERO  */
-#line 404 "parser.y"
+#line 403 "parser.y"
                                        {
         printf("Comparação: %s == %d\n", (yyvsp[-2].strval), (yyvsp[0].intval));
 
@@ -1815,11 +1814,11 @@ yyreduce:
         sprintf(valorStr, "%d", (yyvsp[0].intval));
         (yyval.node) = newNode("EXPRESSAO_LOGICA", 3, newNode((yyvsp[-2].strval), 0), newNode("<=", 0), newNode(valorStr, 0));
     }
-#line 1819 "parser.tab.c"
+#line 1818 "parser.tab.c"
     break;
 
   case 55: /* expressao_logica: IDENTIFICADOR IGUAL STRING  */
-#line 413 "parser.y"
+#line 412 "parser.y"
                                  {
         printf("Comparação: %s == %s\n", (yyvsp[-2].strval), (yyvsp[0].strval));
 
@@ -1827,46 +1826,46 @@ yyreduce:
 
         (yyval.node) = newNode("EXPRESSAO_LOGICA", 3, newNode((yyvsp[-2].strval), 0), newNode("==", 0), newNode((yyvsp[0].strval), 0));
     }
-#line 1831 "parser.tab.c"
+#line 1830 "parser.tab.c"
     break;
 
   case 56: /* operacoes_aritmeticas: operacao_soma  */
-#line 423 "parser.y"
+#line 422 "parser.y"
                   { (yyval.node) = (yyvsp[0].node);}
-#line 1837 "parser.tab.c"
+#line 1836 "parser.tab.c"
     break;
 
   case 57: /* operacoes_aritmeticas: operacao_subtracao  */
-#line 424 "parser.y"
+#line 423 "parser.y"
                          { (yyval.node) = (yyvsp[0].node);}
-#line 1843 "parser.tab.c"
+#line 1842 "parser.tab.c"
     break;
 
   case 58: /* operacoes_aritmeticas: operacao_multiplicacao  */
-#line 425 "parser.y"
+#line 424 "parser.y"
                              { (yyval.node) = (yyvsp[0].node);}
-#line 1849 "parser.tab.c"
+#line 1848 "parser.tab.c"
     break;
 
   case 59: /* operacoes_aritmeticas: operacao_divisao  */
-#line 426 "parser.y"
+#line 425 "parser.y"
                        { (yyval.node) = (yyvsp[0].node);}
-#line 1855 "parser.tab.c"
+#line 1854 "parser.tab.c"
     break;
 
   case 60: /* operacao_soma: IDENTIFICADOR SOMA IDENTIFICADOR  */
-#line 429 "parser.y"
+#line 428 "parser.y"
                                      {
         checkVariableType((yyvsp[-2].strval), "INTEIRO");
         checkVariableType((yyvsp[0].strval), "INTEIRO");
 
         (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode((yyvsp[-2].strval), 0), newNode("+", 0), newNode((yyvsp[0].strval), 0));
     }
-#line 1866 "parser.tab.c"
+#line 1865 "parser.tab.c"
     break;
 
   case 61: /* operacao_soma: IDENTIFICADOR SOMA NUMERO  */
-#line 435 "parser.y"
+#line 434 "parser.y"
                                 {
         checkVariableType((yyvsp[-2].strval), "INTEIRO");
 
@@ -1875,11 +1874,11 @@ yyreduce:
 
         (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode((yyvsp[-2].strval), 0), newNode("+", 0), newNode(valorStr, 0));
     }
-#line 1879 "parser.tab.c"
+#line 1878 "parser.tab.c"
     break;
 
   case 62: /* operacao_soma: NUMERO SOMA IDENTIFICADOR  */
-#line 443 "parser.y"
+#line 442 "parser.y"
                                 {
         checkVariableType((yyvsp[0].strval), "INTEIRO");
 
@@ -1888,11 +1887,11 @@ yyreduce:
 
         (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode(valorStr, 0), newNode("+", 0), newNode((yyvsp[0].strval), 0));
     }
-#line 1892 "parser.tab.c"
+#line 1891 "parser.tab.c"
     break;
 
   case 63: /* operacao_soma: NUMERO SOMA NUMERO  */
-#line 451 "parser.y"
+#line 450 "parser.y"
                          {
         char valorStr1[16];
         char valorStr2[16];
@@ -1901,161 +1900,161 @@ yyreduce:
 
         (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode(valorStr1, 0), newNode("+", 0), newNode(valorStr2, 0));
     }
-#line 1905 "parser.tab.c"
+#line 1904 "parser.tab.c"
     break;
 
   case 64: /* operacao_subtracao: IDENTIFICADOR SUBTRACAO IDENTIFICADOR  */
-#line 462 "parser.y"
+#line 461 "parser.y"
                                           {
         checkVariableType((yyvsp[-2].strval), "INTEIRO");
         checkVariableType((yyvsp[0].strval), "INTEIRO");
 
-        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode((yyvsp[-2].strval), 0), newNode("-", 0), newNode((yyvsp[0].strval), 0));
+        (yyval.node) = newNode("OPERACAO_SUBTRACAO", 3, newNode((yyvsp[-2].strval), 0), newNode("-", 0), newNode((yyvsp[0].strval), 0));
     }
-#line 1916 "parser.tab.c"
+#line 1915 "parser.tab.c"
     break;
 
   case 65: /* operacao_subtracao: IDENTIFICADOR SUBTRACAO NUMERO  */
-#line 468 "parser.y"
+#line 467 "parser.y"
                                      {
         checkVariableType((yyvsp[-2].strval), "INTEIRO");
 
         char valorStr[16];
         sprintf(valorStr, "%d", (yyvsp[0].intval));
 
-        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode((yyvsp[-2].strval), 0), newNode("-", 0), newNode(valorStr, 0));
+        (yyval.node) = newNode("OPERACAO_SUBTRACAO", 3, newNode((yyvsp[-2].strval), 0), newNode("-", 0), newNode(valorStr, 0));
     }
-#line 1929 "parser.tab.c"
+#line 1928 "parser.tab.c"
     break;
 
   case 66: /* operacao_subtracao: NUMERO SUBTRACAO IDENTIFICADOR  */
-#line 476 "parser.y"
+#line 475 "parser.y"
                                      {
         checkVariableType((yyvsp[0].strval), "INTEIRO");
 
         char valorStr[16];
         sprintf(valorStr, "%d", (yyvsp[-2].intval));
 
-        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode(valorStr, 0), newNode("-", 0), newNode((yyvsp[0].strval), 0));
+        (yyval.node) = newNode("OPERACAO_SUBTRACAO", 3, newNode(valorStr, 0), newNode("-", 0), newNode((yyvsp[0].strval), 0));
     }
-#line 1942 "parser.tab.c"
+#line 1941 "parser.tab.c"
     break;
 
   case 67: /* operacao_subtracao: NUMERO SUBTRACAO NUMERO  */
-#line 484 "parser.y"
+#line 483 "parser.y"
                               {
         char valorStr1[16];
         char valorStr2[16];
         sprintf(valorStr1, "%d", (yyvsp[-2].intval));
         sprintf(valorStr1, "%d", (yyvsp[0].intval));
 
-        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode(valorStr1, 0), newNode("-", 0), newNode(valorStr2, 0));
+        (yyval.node) = newNode("OPERACAO_SUBTRACAO", 3, newNode(valorStr1, 0), newNode("-", 0), newNode(valorStr2, 0));
     }
-#line 1955 "parser.tab.c"
+#line 1954 "parser.tab.c"
     break;
 
   case 68: /* operacao_multiplicacao: IDENTIFICADOR MULTIPLICACAO IDENTIFICADOR  */
-#line 495 "parser.y"
+#line 494 "parser.y"
                                               {
         checkVariableType((yyvsp[-2].strval), "INTEIRO");
         checkVariableType((yyvsp[0].strval), "INTEIRO");
 
-        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode((yyvsp[-2].strval), 0), newNode("*", 0), newNode((yyvsp[0].strval), 0));
+        (yyval.node) = newNode("OPERACAO_MULTIPLICACAO", 3, newNode((yyvsp[-2].strval), 0), newNode("*", 0), newNode((yyvsp[0].strval), 0));
     }
-#line 1966 "parser.tab.c"
+#line 1965 "parser.tab.c"
     break;
 
   case 69: /* operacao_multiplicacao: IDENTIFICADOR MULTIPLICACAO NUMERO  */
-#line 501 "parser.y"
+#line 500 "parser.y"
                                          {
         checkVariableType((yyvsp[-2].strval), "INTEIRO");
 
         char valorStr[16];
         sprintf(valorStr, "%d", (yyvsp[0].intval));
 
-        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode((yyvsp[-2].strval), 0), newNode("*", 0), newNode(valorStr, 0));
+        (yyval.node) = newNode("OPERACAO_MULTIPLICACAO", 3, newNode((yyvsp[-2].strval), 0), newNode("*", 0), newNode(valorStr, 0));
     }
-#line 1979 "parser.tab.c"
+#line 1978 "parser.tab.c"
     break;
 
   case 70: /* operacao_multiplicacao: NUMERO MULTIPLICACAO IDENTIFICADOR  */
-#line 509 "parser.y"
+#line 508 "parser.y"
                                          {
         checkVariableType((yyvsp[0].strval), "INTEIRO");
 
         char valorStr[16];
         sprintf(valorStr, "%d", (yyvsp[-2].intval));
 
-        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode(valorStr, 0), newNode("*", 0), newNode((yyvsp[0].strval), 0));
+        (yyval.node) = newNode("OPERACAO_MULTIPLICACAO", 3, newNode(valorStr, 0), newNode("*", 0), newNode((yyvsp[0].strval), 0));
     }
-#line 1992 "parser.tab.c"
+#line 1991 "parser.tab.c"
     break;
 
   case 71: /* operacao_multiplicacao: NUMERO MULTIPLICACAO NUMERO  */
-#line 517 "parser.y"
+#line 516 "parser.y"
                                   {
         char valorStr1[16];
         char valorStr2[16];
         sprintf(valorStr1, "%d", (yyvsp[-2].intval));
         sprintf(valorStr1, "%d", (yyvsp[0].intval));
 
-        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode(valorStr1, 0), newNode("*", 0), newNode(valorStr2, 0));
+        (yyval.node) = newNode("OPERACAO_MULTIPLICACAO", 3, newNode(valorStr1, 0), newNode("*", 0), newNode(valorStr2, 0));
     }
-#line 2005 "parser.tab.c"
+#line 2004 "parser.tab.c"
     break;
 
   case 72: /* operacao_divisao: IDENTIFICADOR DIVISAO IDENTIFICADOR  */
-#line 528 "parser.y"
+#line 527 "parser.y"
                                         {
         checkVariableType((yyvsp[-2].strval), "INTEIRO");
         checkVariableType((yyvsp[0].strval), "INTEIRO");
 
-        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode((yyvsp[-2].strval), 0), newNode("/", 0), newNode((yyvsp[0].strval), 0));
+        (yyval.node) = newNode("OPERACAO_DIVISAO", 3, newNode((yyvsp[-2].strval), 0), newNode("/", 0), newNode((yyvsp[0].strval), 0));
     }
-#line 2016 "parser.tab.c"
+#line 2015 "parser.tab.c"
     break;
 
   case 73: /* operacao_divisao: IDENTIFICADOR DIVISAO NUMERO  */
-#line 534 "parser.y"
+#line 533 "parser.y"
                                    {
         checkVariableType((yyvsp[-2].strval), "INTEIRO");
 
         char valorStr[16];
         sprintf(valorStr, "%d", (yyvsp[0].intval));
 
-        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode((yyvsp[-2].strval), 0), newNode("/", 0), newNode(valorStr, 0));
+        (yyval.node) = newNode("OPERACAO_DIVISAO", 3, newNode((yyvsp[-2].strval), 0), newNode("/", 0), newNode(valorStr, 0));
     }
-#line 2029 "parser.tab.c"
+#line 2028 "parser.tab.c"
     break;
 
   case 74: /* operacao_divisao: NUMERO DIVISAO IDENTIFICADOR  */
-#line 542 "parser.y"
+#line 541 "parser.y"
                                    {
         checkVariableType((yyvsp[0].strval), "INTEIRO");
 
         char valorStr[16];
         sprintf(valorStr, "%d", (yyvsp[-2].intval));
 
-        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode(valorStr, 0), newNode("/", 0), newNode((yyvsp[0].strval), 0));
+        (yyval.node) = newNode("OPERACAO_DIVISAO", 3, newNode(valorStr, 0), newNode("/", 0), newNode((yyvsp[0].strval), 0));
     }
-#line 2042 "parser.tab.c"
+#line 2041 "parser.tab.c"
     break;
 
   case 75: /* operacao_divisao: NUMERO DIVISAO NUMERO  */
-#line 550 "parser.y"
+#line 549 "parser.y"
                             {
         char valorStr1[16];
         char valorStr2[16];
         sprintf(valorStr1, "%d", (yyvsp[-2].intval));
-        sprintf(valorStr1, "%d", (yyvsp[0].intval));
+        sprintf(valorStr2, "%d", (yyvsp[0].intval));
 
-        (yyval.node) = newNode("OPERACAO_SOMA", 3, newNode(valorStr1, 0), newNode("/", 0), newNode(valorStr2, 0));
+        (yyval.node) = newNode("OPERACAO_DIVISAO", 3, newNode(valorStr1, 0), newNode("/", 0), newNode(valorStr2, 0));
     }
-#line 2055 "parser.tab.c"
+#line 2054 "parser.tab.c"
     break;
 
 
-#line 2059 "parser.tab.c"
+#line 2058 "parser.tab.c"
 
       default: break;
     }
@@ -2248,7 +2247,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 560 "parser.y"
+#line 559 "parser.y"
 
 void yyerror(const char *s) {
     fprintf(stderr, "Erro sintático na linha %d: %s\n", yylineno - 1, s);
@@ -2274,5 +2273,30 @@ void yyerror(const char *s) {
 
 int main() {
     yydebug = 0;
-    return yyparse();
+
+    if (yyparse() != 0) {
+        fprintf(stderr, "[ERRO] Falha na análise sintática.\n");
+        return EXIT_FAILURE;
+    }
+
+    if (syntaxTree == NULL) {
+        fprintf(stderr, "[ERRO] Árvore sintática não foi gerada corretamente!\n");
+        return EXIT_FAILURE;
+    }
+
+    printf("[DEBUG] Gerando código C++...\n");
+
+    // Abrir o arquivo de saída para C++
+    FILE *cppFile = fopen("output/saida.cpp", "w");
+    if (!cppFile) {
+        perror("[ERRO] Não foi possível criar o arquivo de saída");
+        return EXIT_FAILURE;
+    }
+
+    generateFinalCppCode(syntaxTree, cppFile);
+    fclose(cppFile);
+
+    printf("[SUCESSO] Código C++ gerado em 'saida.cpp'.\n");
+
+    return 0;
 }
